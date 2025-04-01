@@ -1,0 +1,260 @@
+Design patterns are reusable solutions to common software design problems. Below are key patterns used in JavaScript.
+
+## 1. Module Pattern
+
+Encapsulates code into self-contained modules with private/public members.
+
+### Using IIFE (Immediately Invoked Function Expression)
+
+```javascript
+const CounterModule = (() => {
+  let count = 0; // Private variable
+
+  const increment = () => count++;
+  const getCount = () => count;
+
+  return {increment, getCount}; // Public API
+})();
+
+CounterModule.increment();
+console.log(CounterModule.getCount()); // 1
+console.log(CounterModule.count); // undefined (private)
+```
+
+**Use Case:**
+
+- Isolate logic to avoid global scope pollution
+
+## 2. Singleton Pattern
+
+Ensures only one instance of a class exists.
+
+### Implementation
+
+```javascript
+class Database {
+  constructor() {
+    if (Database.instance) return Database.instance;
+    Database.instance = this;
+    this.connection = 'Connected to DB';
+    return this;
+  }
+}
+
+const db1 = new Database();
+const db2 = new Database();
+console.log(db1 === db2); // true (same instance)
+```
+
+**Use Case:**
+
+- Managing shared resources (e.g., database connections)
+
+## 3. Factory Pattern
+
+Creates objects without exposing the instantiation logic.
+
+### Example
+
+```javascript
+class Car {
+  constructor(make, model) {
+    this.make = make;
+    this.model = model;
+  }
+}
+
+class CarFactory {
+  createCar(type) {
+    switch (type) {
+      case 'sedan':
+        return new Car('Toyota', 'Camry');
+      case 'suv':
+        return new Car('Ford', 'Explorer');
+      default:
+        throw new Error('Unknown car type');
+    }
+  }
+}
+
+const factory = new CarFactory();
+const myCar = factory.createCar('sedan');
+console.log(myCar); // { make: "Toyota", model: "Camry" }
+```
+
+**Use Case:**
+
+- Dynamic object creation (e.g., UI components, API clients)
+
+## 4. Observer Pattern
+
+Allows objects (observers) to subscribe to events from another object (subject).
+
+### Implementation
+
+```javascript
+class EventObserver {
+  constructor() {
+    this.observers = [];
+  }
+
+  subscribe(fn) {
+    this.observers.push(fn);
+  }
+
+  unsubscribe(fn) {
+    this.observers = this.observers.filter((subscriber) => subscriber !== fn);
+  }
+
+  notify(data) {
+    this.observers.forEach((observer) => observer(data));
+  }
+}
+
+const observer = new EventObserver();
+
+// Subscribe
+const logData = (data) => console.log('Received:', data);
+observer.subscribe(logData);
+
+// Notify
+observer.notify('Hello!'); // "Received: Hello!"
+
+// Unsubscribe
+observer.unsubscribe(logData);
+```
+
+**Use Case:**
+
+- Real-time updates (e.g., chat apps, stock tickers)
+
+## 5. MVC / MVVM Architecture
+
+### A. MVC (Model-View-Controller)
+
+| Layer      | Responsibility                        |
+| ---------- | ------------------------------------- |
+| Model      | Manages data and business logic       |
+| View       | Handles UI rendering                  |
+| Controller | Mediates input between Model and View |
+
+**Example (Backend MVC with Express):**
+
+```javascript
+// Model (user.js)
+class User {
+  static getAll() { return db.query("SELECT * FROM users"); }
+}
+
+// Controller (userController.js)
+const getUsers = (req, res) => {
+  const users = User.getAll();
+  res.render("users", { users });
+};
+
+// View (users.ejs)
+<% users.forEach(user => { %>
+  <p><%= user.name %></p>
+<% }); %>
+```
+
+### B. MVVM (Model-View-ViewModel)
+
+Used in frontend frameworks (e.g., Vue, Angular).
+
+| Layer     | Responsibility                   |
+| --------- | -------------------------------- |
+| Model     | Data structure                   |
+| View      | UI (template)                    |
+| ViewModel | Binds Model to View (reactivity) |
+
+**Example (Vue):**
+
+```html
+<template>
+  <!-- View -->
+  <p>{{ message }}</p>
+</template>
+
+<script>
+  export default {
+    // ViewModel
+    data() {
+      // Model
+      return {message: 'Hello!'};
+    },
+  };
+</script>
+```
+
+## 6. Dependency Injection
+
+Provides dependencies to a class externally (improves testability).
+
+### Constructor Injection
+
+```javascript
+class UserService {
+  constructor(database) {
+    this.db = database;
+  }
+
+  getUsers() {
+    return this.db.query('SELECT * FROM users');
+  }
+}
+
+const db = new Database();
+const userService = new UserService(db); // Inject dependency
+```
+
+**Use Case:**
+
+- Unit testing (easily mock dependencies)
+- Decoupling components
+
+## 7. Pub/Sub (Publish-Subscribe) Pattern
+
+A messaging pattern where publishers send messages to subscribers via a broker.
+
+### Implementation
+
+```javascript
+class PubSub {
+  constructor() {
+    this.topics = {};
+  }
+
+  subscribe(topic, callback) {
+    if (!this.topics[topic]) this.topics[topic] = [];
+    this.topics[topic].push(callback);
+  }
+
+  publish(topic, data) {
+    if (!this.topics[topic]) return;
+    this.topics[topic].forEach((cb) => cb(data));
+  }
+}
+
+const pubsub = new PubSub();
+
+// Subscribe
+pubsub.subscribe('news', (data) => console.log('News:', data));
+
+// Publish
+pubsub.publish('news', 'JavaScript is awesome!');
+```
+
+**Use Case:**
+
+- Decoupled event handling (e.g., microservices, UI events)
+
+## Key Takeaways
+
+- Module → Encapsulation with private/public members
+- Singleton → Single instance of a class
+- Factory → Object creation without new
+- Observer → Event-driven subscriptions
+- MVC/MVVM → Separation of concerns in apps
+- Dependency Injection → Testable, decoupled code
+- Pub/Sub → Decoupled message broadcasting
