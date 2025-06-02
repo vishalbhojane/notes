@@ -20,7 +20,7 @@ const obj = {
 
 ```javascript
 const person = {
-  name: 'Alice',
+  name: "Alice",
   age: 25,
   greet() {
     console.log(`Hello, ${this.name}!`);
@@ -43,7 +43,7 @@ console.log(person.name); // "Alice"
 Useful for dynamic keys.
 
 ```javascript
-const key = 'age';
+const key = "age";
 console.log(person[key]); // 25
 ```
 
@@ -70,13 +70,13 @@ Extract properties into variables.
 **Syntax:**
 
 ```javascript
-const {prop1, prop2} = obj;
+const { prop1, prop2 } = obj;
 ```
 
 **Example:**
 
 ```javascript
-const {name, age} = person;
+const { name, age } = person;
 console.log(name); // "Alice"
 console.log(age); // 25
 ```
@@ -88,7 +88,7 @@ console.log(age); // 25
 Copies properties into a new object.
 
 ```javascript
-const newPerson = {...person, city: 'Berlin'};
+const newPerson = { ...person, city: "Berlin" };
 ```
 
 ### B. Rest Operator (...)
@@ -96,7 +96,7 @@ const newPerson = {...person, city: 'Berlin'};
 Collects remaining properties.
 
 ```javascript
-const {name, ...rest} = person;
+const { name, ...rest } = person;
 console.log(rest); // { age: 25, greet: [Function] }
 ```
 
@@ -110,7 +110,7 @@ Objects inherit properties from a prototype.
 const animal = {
   eats: true,
   walk() {
-    console.log('Walking...');
+    console.log("Walking...");
   },
 };
 
@@ -130,17 +130,17 @@ Control access to object properties.
 
 ```javascript
 const user = {
-  firstName: 'John',
-  lastName: 'Doe',
+  firstName: "John",
+  lastName: "Doe",
   get fullName() {
     return `${this.firstName} ${this.lastName}`;
   },
   set fullName(name) {
-    [this.firstName, this.lastName] = name.split(' ');
+    [this.firstName, this.lastName] = name.split(" ");
   },
 };
 
-user.fullName = 'Alice Cooper';
+user.fullName = "Alice Cooper";
 console.log(user.fullName); // "Alice Cooper"
 ```
 
@@ -186,7 +186,7 @@ class Dog extends Animal {
   }
 }
 
-const dog = new Dog('Rex', 'Labrador');
+const dog = new Dog("Rex", "Labrador");
 dog.speak(); // "Rex barks!"
 ```
 
@@ -206,4 +206,119 @@ class MathUtils {
 
 console.log(MathUtils.square(5)); // 25
 console.log(MathUtils.PI); // 3.14
+```
+
+## 10. this Keyword
+
+### A. How this Works
+
+| Context        | this Value                                          | Example                                                   |
+| -------------- | --------------------------------------------------- | --------------------------------------------------------- |
+| Global         | window (browser) / global (Node)                    | console.log(this)                                         |
+| Function       | window/global (non-strict), undefined (strict mode) | function f() { console.log(this); }                       |
+| Method         | The object calling the method                       | obj.method() → this = obj                                 |
+| Event Handler  | The DOM element that triggered the event            | button.onclick = function() { this.style.color = 'red'; } |
+| Arrow Function | Inherits from parent scope (lexical this)           | const f = () => { console.log(this); }                    |
+
+#### Example:
+
+```javascript
+const person = {
+  name: "Alice",
+  greet: function () {
+    console.log(`Hello, ${this.name}!`); // `this` = person object
+  },
+  arrowGreet: () => {
+    console.log(`Hi, ${this.name}!`); // `this` = window (inherited)
+  },
+};
+person.greet(); // "Hello, Alice!"
+person.arrowGreet(); // "Hi, undefined!" (lexical this)
+```
+
+### B. Explicit Binding
+
+| Method  | Description                                      | Example                              |
+| ------- | ------------------------------------------------ | ------------------------------------ |
+| call()  | Calls function with specified this and arguments | func.call(thisArg, arg1, arg2)       |
+| apply() | Similar to call() but takes array of args        | func.apply(thisArg, [args])          |
+| bind()  | Returns new function with bound this             | const boundFunc = func.bind(thisArg) |
+
+#### Example:
+
+```javascript
+function introduce(lang) {
+  console.log(`I code in ${lang} as ${this.name}`);
+}
+
+const dev = { name: "Alice" };
+introduce.call(dev, "JavaScript"); // "I code in JavaScript as Alice"
+introduce.apply(dev, ["Python"]); // "I code in Python as Alice"
+const boundIntro = introduce.bind(dev);
+boundIntro("Ruby"); // "I code in Ruby as Alice"
+```
+
+### C. Method Chaining
+
+Design pattern where methods return this to enable consecutive calls.
+
+#### Implementation:
+
+```javascript
+class Calculator {
+  constructor(value = 0) {
+    this.value = value;
+  }
+
+  add(n) {
+    this.value += n;
+    return this; // ← Key to chaining
+  }
+
+  multiply(n) {
+    this.value *= n;
+    return this;
+  }
+}
+
+const calc = new Calculator();
+calc.add(5).multiply(2).add(10); // value = 20
+```
+
+### D. Property Descriptors
+
+Control property attributes like writability, enumerability, and configurability.
+
+| Attribute    | Description                | Default   |
+| ------------ | -------------------------- | --------- |
+| value        | Property value             | undefined |
+| writable     | Can be changed             | true      |
+| enumerable   | Shows up in for...in loops | true      |
+| configurable | Can be deleted or modified | true      |
+
+#### Methods:
+
+```javascript
+// Get descriptor
+const desc = Object.getOwnPropertyDescriptor(obj, "property");
+
+// Define/modify property
+Object.defineProperty(obj, "property", {
+  value: 42,
+  writable: false, // Makes it read-only
+  enumerable: false, // Hides from Object.keys()
+});
+```
+
+#### Example:
+
+```javascript
+const obj = {};
+Object.defineProperty(obj, "readOnly", {
+  value: 100,
+  writable: false,
+});
+
+obj.readOnly = 200; // Fails silently in non-strict
+console.log(obj.readOnly); // 100 (unchanged)
 ```

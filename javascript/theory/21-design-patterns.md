@@ -249,6 +249,169 @@ pubsub.publish('news', 'JavaScript is awesome!');
 
 - Decoupled event handling (e.g., microservices, UI events)
 
+## 8. Prototype Pattern
+
+Creates new objects by cloning an existing prototype object, rather than creating new instances from scratch.
+
+#### Implementation
+
+javascript
+
+```javascript
+const carPrototype = {
+  wheels: 4,
+  start() {
+    return 'Engine started!';
+  },
+  stop() {
+    return 'Engine stopped!';
+  }
+};
+
+// Create new object by cloning prototype
+const myCar = Object.create(carPrototype);
+myCar.make = 'Toyota';
+console.log(myCar.start()); // "Engine started!"
+console.log(myCar.wheels); // 4 (inherited)
+
+// Alternative constructor approach
+function Car(make) {
+  this.make = make;
+}
+Car.prototype = carPrototype;
+
+const anotherCar = new Car('Ford');
+```
+
+**Use Cases:**
+
+- When object creation is expensive (clone instead)
+- Default configurations for similar objects
+- JavaScript's native prototypal inheritance
+
+## 9. Decorator Pattern
+
+Adds behavior to objects dynamically without affecting other objects of the same class.
+
+#### Implementation
+
+javascript
+
+```javascript
+class Coffee {
+  cost() {
+    return 5;
+  }
+}
+
+// Decorator
+function withMilk(coffee) {
+  const cost = coffee.cost();
+  coffee.cost = () => cost + 2;
+}
+
+// Another Decorator
+function withSugar(coffee) {
+  const cost = coffee.cost();
+  coffee.cost = () => cost + 1;
+}
+
+const myCoffee = new Coffee();
+withMilk(myCoffee);
+withSugar(myCoffee);
+console.log(myCoffee.cost()); // 8 (5 + 2 + 1)
+
+// Modern ES6 Decorators (Stage 3 Proposal)
+@withMilk
+@withSugar
+class SpecialCoffee {
+  cost = 5;
+}
+```
+
+**Use Cases:**
+
+- Adding features to existing classes
+- Alternative to subclassing
+- Middleware implementations
+
+## 10. Strategy Pattern
+
+Encapsulates interchangeable algorithms/behaviors and lets the algorithm vary independently from clients.
+
+#### Implementation
+
+javascript
+
+```javascript
+// Strategies
+const paymentStrategies = {
+  creditCard: (amount) => `Paid ${amount} via Credit Card`,
+  paypal: (amount) => `Paid ${amount} via PayPal`,
+  crypto: (amount) => `Paid ${amount} via Bitcoin`
+};
+
+// Context
+class PaymentProcessor {
+  constructor(strategy) {
+    this.strategy = paymentStrategies[strategy];
+  }
+
+  process(amount) {
+    return this.strategy(amount);
+  }
+}
+
+const payment = new PaymentProcessor('crypto');
+console.log(payment.process(100)); // "Paid 100 via Bitcoin"
+```
+
+**Use Cases:**
+
+- Multiple ways to perform an operation (e.g., payments, sorting)
+- Replacing conditional logic
+- Plugin architectures
+
+## 11. Revealing Module Pattern
+
+An improved Module Pattern that explicitly declares public members.
+
+#### Implementation
+
+javascript
+
+```javascript
+const UserModule = (() => {
+  const privateVar = 'I am private';
+
+  function privateMethod() {
+    console.log(privateVar);
+  }
+
+  function publicMethod() {
+    privateMethod();
+  }
+
+  return {
+    publicMethod // Only expose what's needed
+  };
+})();
+
+UserModule.publicMethod(); // "I am private"
+console.log(UserModule.privateVar); // undefined
+```
+
+**Advantages over Classic Module Pattern:**
+
+- Clearer intent (explicit exports)
+- Easier to rename public methods
+- Better code organization
+
+**Use Cases:**
+
+- Browser-side modules
+- Library development
+- Anywhere encapsulation is needed
 ## Key Takeaways
 
 - Module → Encapsulation with private/public members

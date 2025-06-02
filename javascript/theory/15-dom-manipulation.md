@@ -20,8 +20,8 @@ The Document Object Model (DOM) is a programming interface for web documents. Ja
 **Example:**
 
 ```javascript
-const header = document.getElementById('header');
-const buttons = document.querySelectorAll('.btn');
+const header = document.getElementById("header");
+const buttons = document.querySelectorAll(".btn");
 ```
 
 ## 2. Changing Content
@@ -36,10 +36,10 @@ const buttons = document.querySelectorAll('.btn');
 **Example:**
 
 ```javascript
-const div = document.querySelector('div');
-div.innerText = 'New text';
-div.innerHTML = '<p>Styled text</p>';
-div.setAttribute('class', 'active');
+const div = document.querySelector("div");
+div.innerText = "New text";
+div.innerHTML = "<p>Styled text</p>";
+div.setAttribute("class", "active");
 ```
 
 ## 3. Adding & Removing Elements
@@ -47,7 +47,7 @@ div.setAttribute('class', 'active');
 ### A. Creating & Adding Elements
 
 ```javascript
-const newElement = document.createElement('div');
+const newElement = document.createElement("div");
 newElement.innerText = "I'm new!";
 
 // Append to the end
@@ -60,7 +60,7 @@ parent.insertBefore(newElement, referenceElement);
 ### B. Removing Elements
 
 ```javascript
-const element = document.querySelector('.item');
+const element = document.querySelector(".item");
 element.remove(); // Modern way (ES6)
 
 // Older way
@@ -72,9 +72,9 @@ parent.removeChild(element);
 ### A. Adding Events
 
 ```javascript
-const button = document.querySelector('button');
-button.addEventListener('click', () => {
-  console.log('Button clicked!');
+const button = document.querySelector("button");
+button.addEventListener("click", () => {
+  console.log("Button clicked!");
 });
 ```
 
@@ -82,11 +82,11 @@ button.addEventListener('click', () => {
 
 ```javascript
 function handleClick() {
-  console.log('Clicked!');
+  console.log("Clicked!");
 }
 
-button.addEventListener('click', handleClick);
-button.removeEventListener('click', handleClick); // Removes the listener
+button.addEventListener("click", handleClick);
+button.removeEventListener("click", handleClick); // Removes the listener
 ```
 
 ### Common Events
@@ -107,8 +107,8 @@ Efficiently handle events for multiple elements using a single parent listener.
 
 ```javascript
 // Inefficient (adds listeners to every button)
-document.querySelectorAll('.btn').forEach((btn) => {
-  btn.addEventListener('click', handleClick);
+document.querySelectorAll(".btn").forEach((btn) => {
+  btn.addEventListener("click", handleClick);
 });
 ```
 
@@ -116,9 +116,9 @@ document.querySelectorAll('.btn').forEach((btn) => {
 
 ```javascript
 // Efficient (one listener on parent)
-document.getElementById('container').addEventListener('click', (e) => {
-  if (e.target.classList.contains('btn')) {
-    console.log('Button clicked:', e.target);
+document.getElementById("container").addEventListener("click", (e) => {
+  if (e.target.classList.contains("btn")) {
+    console.log("Button clicked:", e.target);
   }
 });
 ```
@@ -133,10 +133,10 @@ document.getElementById('container').addEventListener('click', (e) => {
 ### A. Accessing Form Data
 
 ```javascript
-const form = document.querySelector('form');
-form.addEventListener('submit', (e) => {
+const form = document.querySelector("form");
+form.addEventListener("submit", (e) => {
   e.preventDefault(); // Prevents page reload
-  const input = document.querySelector('#username');
+  const input = document.querySelector("#username");
   console.log(input.value); // Get input value
 });
 ```
@@ -144,20 +144,146 @@ form.addEventListener('submit', (e) => {
 ### B. Input Events
 
 ```javascript
-const input = document.querySelector('input');
-input.addEventListener('input', (e) => {
-  console.log('Typed:', e.target.value);
+const input = document.querySelector("input");
+input.addEventListener("input", (e) => {
+  console.log("Typed:", e.target.value);
 });
 ```
 
 ### C. Form Validation
 
 ```javascript
-form.addEventListener('submit', (e) => {
-  const email = document.getElementById('email').value;
-  if (!email.includes('@')) {
-    alert('Invalid email!');
+form.addEventListener("submit", (e) => {
+  const email = document.getElementById("email").value;
+  if (!email.includes("@")) {
+    alert("Invalid email!");
     e.preventDefault();
   }
+});
+```
+
+## 7. Advanced Observers
+
+### A. IntersectionObserver
+
+Tracks when elements enter/leave the viewport or another element.
+
+#### Use Cases:
+
+- Lazy loading images
+- Infinite scrolling
+- Animation triggers
+- Analytics tracking
+
+#### Implementation:
+
+```javascript
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        console.log(`${entry.target.id} is visible!`);
+        entry.target.classList.add("active");
+        // observer.unobserve(entry.target); // Stop observing if needed
+      }
+    });
+  },
+  {
+    threshold: 0.5, // 50% visibility required
+    rootMargin: "100px", // Trigger 100px before entering viewport
+  }
+);
+
+// Observe elements
+document.querySelectorAll(".item").forEach((item) => {
+  observer.observe(item);
+});
+```
+
+#### Key Options:
+
+| Option     | Description                            |
+| ---------- | -------------------------------------- |
+| root       | Parent element (default: viewport)     |
+| threshold  | Visibility percentage (0-1) to trigger |
+| rootMargin | Expands/shrinks the effective viewport |
+
+### B. MutationObserver
+
+Watches for changes in the DOM tree.
+
+#### Use Cases:
+
+- Dynamic content monitoring
+- Third-party script integration
+- Custom element behavior
+- Debugging DOM changes
+
+#### Implementation:
+
+```javascript
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    if (mutation.type === "childList") {
+      console.log("Nodes changed:", mutation.addedNodes);
+    }
+    if (mutation.type === "attributes") {
+      console.log(`${mutation.attributeName} changed`);
+    }
+  });
+});
+
+// Start observing
+observer.observe(document.getElementById("container"), {
+  attributes: true,
+  childList: true,
+  subtree: true,
+  attributeOldValue: true,
+});
+
+// Later... disconnect when done
+// observer.disconnect();
+```
+
+#### Observation Options:
+
+| Option            | Watches For                      |
+| ----------------- | -------------------------------- |
+| childList         | Node additions/removals          |
+| attributes        | Attribute changes                |
+| characterData     | Text content changes             |
+| subtree           | Changes in all descendants       |
+| attributeOldValue | Records previous attribute value |
+
+### Performance Comparison
+
+| Observer             | Best For                        | Performance Impact                 |
+| -------------------- | ------------------------------- | ---------------------------------- |
+| IntersectionObserver | Viewport-related changes        | Low (browser-optimized)            |
+| MutationObserver     | DOM structure/attribute changes | Moderate (avoid complex callbacks) |
+
+### Best Practices:
+
+- Disconnect observers when no longer needed
+- Debounce callbacks for frequent mutations
+- Use specific selectors to minimize observed areas
+- Combine with requestIdleCallback for non-critical observations
+
+### Real-World Example (Lazy Loading):
+
+```javascript
+// Lazy load images
+const imgObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.dataset.src;
+      imgObserver.unobserve(img);
+    }
+  });
+});
+
+document.querySelectorAll("img[data-src]").forEach((img) => {
+  imgObserver.observe(img);
 });
 ```

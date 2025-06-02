@@ -294,3 +294,159 @@ console.log('End');
 // Output:
 // "Start" → "End" → "Promise" → "Timeout"
 ```
+
+## 6. for-await-of (Async Iteration)
+
+### A. Introduction
+
+A loop that iterates over async iterables (Promises, async generators, Node.js streams) in sequential order.
+
+javascript
+
+```javascript
+for await (const item of asyncIterable) {
+  // Process each item as it resolves
+}
+```
+
+### B. Key Features
+
+- Waits for each Promise to resolve before continuing
+- Works with any async iterable (objects implementing Symbol.asyncIterator)
+- Similar to for...of but for async operations
+
+### C. Use Cases
+
+- Processing API pagination
+- Reading large files/streams
+- Handling multiple sequential async operations
+
+### D. Examples
+
+#### 1. With Async Generators
+
+javascript
+
+```javascript
+async function* asyncNumbers() {
+  yield Promise.resolve(1);
+  yield Promise.resolve(2);
+  yield Promise.resolve(3);
+}
+
+(async () => {
+  for await (const num of asyncNumbers()) {
+    console.log(num); // 1, 2, 3 (in order)
+  }
+})();
+```
+
+#### 2. With API Pagination
+
+javascript
+
+```javascript
+async function* fetchPages(url) {
+  let nextPage = true;
+  let page = 1;
+  
+  while (nextPage) {
+    const response = await fetch(`${url}?page=${page}`);
+    const data = await response.json();
+    
+    yield data.items;
+    page++;
+    nextPage = data.hasMore;
+  }
+}
+
+// Usage
+(async () => {
+  for await (const items of fetchPages('https://api.example.com/data')) {
+    console.log('New batch:', items);
+    // Process items sequentially
+  }
+})();
+```
+
+#### 3. With Promise Arrays
+
+javascript
+
+```javascript
+const promises = [
+  fetch('/api/1'),
+  fetch('/api/2'), 
+  fetch('/api/3')
+];
+
+(async () => {
+  for await (const response of promises) {
+    const data = await response.json();
+    console.log(data); // Processes in order but starts all requests immediately
+  }
+})();
+```
+
+### E. Comparison with Promise.all
+
+|Feature|for-await-of|Promise.all|
+|---|---|---|
+|Order|Sequential processing|Parallel processing|
+|Memory|Processes one at a time|Loads all into memory|
+|Error Handling|Can continue after errors (try/catch)|Fails fast on first error|
+|Use Case|Streams, sequential dependencies|Independent parallel operations|
+
+### F. Error Handling
+
+javascript
+
+```javascript
+try {
+  for await (const item of asyncIterable) {
+    // Process item
+  }
+} catch (err) {
+  console.error('Iteration failed:', err);
+}
+```
+
+### G. Creating Async Iterables
+
+javascript
+
+```javascript
+const asyncIterable = {
+  [Symbol.asyncIterator]: async function* () {
+    yield await Promise.resolve('First');
+    yield await Promise.resolve('Second');
+  }
+};
+
+(async () => {
+  for await (const value of asyncIterable) {
+    console.log(value); // "First", "Second"
+  }
+})();
+```
+
+### H. Real-world Example (Node.js Stream)
+
+javascript
+
+```javascript
+import { createReadStream } from 'fs';
+
+const fileStream = createReadStream('large-file.txt', {
+  encoding: 'utf8',
+  highWaterMark: 1024 // Chunk size
+});
+
+(async () => {
+  for await (const chunk of fileStream) {
+    console.log('Read chunk:', chunk.length);
+    // Process file chunks sequentially
+  }
+  console.log('File fully processed');
+})();
+```

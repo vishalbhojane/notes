@@ -121,3 +121,84 @@ Maps then flattens (depth = 1).
 const arr = [1, 2];
 console.log(arr.flatMap((x) => [x, x * 2])); // [1, 2, 2, 4]
 ```
+
+## 8. Array Methods as Loops
+
+### A. forEach()
+
+Executes a function for each array element.
+
+**Syntax:**
+
+```javascript
+array.forEach((item, index, array) => {
+  // code to run
+});
+```
+
+**Example:**
+
+```javascript
+const numbers = [1, 2, 3];
+
+numbers.forEach((num) => {
+  console.log(num); // 1, 2, 3
+});
+```
+
+### B. map()
+
+Creates a new array by transforming each element.
+
+**Syntax:**
+
+```javascript
+const newArray = array.map((item, index, array) => {
+  return modifiedItem;
+});
+```
+
+**Example:**
+
+```javascript
+const doubled = numbers.map((num) => num * 2);
+console.log(doubled); // [2, 4, 6]
+```
+
+### C. filter()
+
+Creates a new array with elements that pass a test.
+
+**Syntax:**
+
+```javascript
+const filteredArray = array.filter((item, index, array) => {
+  return condition;
+});
+```
+
+**Example:**
+
+```javascript
+const evens = numbers.filter((num) => num % 2 === 0);
+console.log(evens); // [2]
+```
+
+### D. reduce()
+
+Reduces an array to a single value (e.g., sum).
+
+**Syntax:**
+
+```javascript
+const result = array.reduce((accumulator, currentValue, index, array) => {
+  return updatedAccumulator;
+}, initialValue);
+```
+
+**Example:**
+
+```javascript
+const sum = numbers.reduce((total, num) => total + num, 0);
+console.log(sum); // 6
+```

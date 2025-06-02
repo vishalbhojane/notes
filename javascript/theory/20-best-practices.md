@@ -67,8 +67,8 @@ const add = (a, b) => a + b;
 ### B. Destructuring
 
 ```javascript
-const user = {name: 'Alice', age: 25};
-const {name, age} = user;
+const user = { name: "Alice", age: 25 };
+const { name, age } = user;
 ```
 
 ### C. Template Literals
@@ -129,11 +129,11 @@ for (const item of array) {
 
 ```javascript
 // Bad (triggers multiple reflows)
-element.style.width = '100px';
-element.style.height = '200px';
+element.style.width = "100px";
+element.style.height = "200px";
 
 // Good (updates in one pass)
-element.style.cssText = 'width: 100px; height: 200px;';
+element.style.cssText = "width: 100px; height: 200px;";
 ```
 
 - Use documentFragment for bulk inserts:
@@ -141,7 +141,7 @@ element.style.cssText = 'width: 100px; height: 200px;';
 ```javascript
 const fragment = document.createDocumentFragment();
 for (let i = 0; i < 100; i++) {
-  const div = document.createElement('div');
+  const div = document.createElement("div");
   fragment.appendChild(div);
 }
 document.body.appendChild(fragment);
@@ -159,7 +159,7 @@ const debounce = (func, delay) => {
   };
 };
 
-window.addEventListener('resize', debounce(handleResize, 200));
+window.addEventListener("resize", debounce(handleResize, 200));
 ```
 
 ## 6. Memory Management
@@ -169,8 +169,8 @@ window.addEventListener('resize', debounce(handleResize, 200));
 - Remove event listeners when no longer needed:
 
 ```javascript
-button.addEventListener('click', onClick);
-button.removeEventListener('click', onClick);
+button.addEventListener("click", onClick);
+button.removeEventListener("click", onClick);
 ```
 
 - Clear intervals/timeouts:
@@ -213,3 +213,156 @@ src/
 | Liskov Substitution   | Subclasses should replace parents       |
 | Interface Segregation | Avoid bloated interfaces                |
 | Dependency Inversion  | Depend on abstractions, not concretions |
+
+## 8. Critical Rendering Path Optimization
+
+### What is the Critical Rendering Path?
+
+The sequence of steps browsers take to convert HTML, CSS, and JavaScript into pixels on the screen.
+
+#### Key Steps:
+
+1. DOM Construction: Parse HTML → DOM Tree
+2. CSSOM Construction: Parse CSS → CSSOM Tree
+3. Render Tree: Combine DOM + CSSOM
+4. Layout: Calculate element positions (reflow)
+5. Paint: Fill in pixels (repaint)
+
+### Optimization Techniques
+
+#### A. HTML
+
+```html
+<!-- Minify HTML: Remove whitespace/comments -->
+<!-- DOM Size: Keep <1500 nodes, depth <32 levels -->
+
+<!-- Async/Defer Scripts -->
+<script defer src="app.js"></script>
+<script async src="analytics.js"></script>
+```
+
+#### B. CSS
+
+```html
+<!-- Critical CSS: Inline above-the-fold styles -->
+<style>
+  /* Critical styles here */
+</style>
+
+<!-- Avoid @import: Causes render-blocking -->
+
+<!-- Media Queries: Split non-critical CSS -->
+<link href="print.css" media="print" rel="stylesheet" />
+```
+
+#### C. JavaScript
+
+```javascript
+// Code Splitting: Dynamic imports
+import('./module.js').then(module => {...});
+
+// RequestIdleCallback: For non-urgent tasks
+requestIdleCallback(() => {
+  // Low-priority work
+});
+```
+
+#### D. Rendering
+
+```css
+/* Will-Change: Hint browsers about future changes */
+.animated {
+  will-change: transform, opacity;
+}
+
+/* Containment: Isolate rendering */
+.isolated {
+  contain: layout paint;
+}
+```
+
+### Virtual DOM Concepts
+
+#### What is the Virtual DOM?
+
+A lightweight JavaScript representation of the actual DOM.
+
+#### How It Works:
+
+1. Initial Render: Create virtual DOM tree
+2. State Change: Generate new virtual DOM
+3. Diffing: Compare with previous virtual DOM (React's Reconciliation)
+4. Commit: Update only changed parts in real DOM
+
+#### Implementation Example:
+
+```javascript
+// Simplified virtual DOM implementation
+class VNode {
+  constructor(tag, props, children) {
+    this.tag = tag;
+    this.props = props;
+    this.children = children;
+  }
+}
+
+function createElement(tag, props, children) {
+  return new VNode(tag, props, children);
+}
+
+function diff(oldNode, newNode) {
+  // Diffing logic here
+  return patches;
+}
+
+function patch(realDOM, patches) {
+  // Apply changes to real DOM
+}
+```
+
+#### Framework-Specific Optimizations:
+
+| Framework | Key Optimization                           |
+| --------- | ------------------------------------------ |
+| React     | Fiber Architecture (incremental rendering) |
+| Vue       | Compiler-informed static hoisting          |
+| Svelte    | Compiles to direct DOM operations          |
+
+#### When Virtual DOM Helps:
+
+- Complex UIs with frequent updates
+- Cross-platform rendering (React Native)
+- Large datasets with selective rendering
+
+#### When It's Overkill:
+
+- Static websites
+- Performance-critical animations
+- Small widgets with direct DOM manipulation
+
+### Key Takeaways:
+
+1. Critical Path:
+
+- Optimize for first meaningful paint
+- Prioritize visible content
+- Delay non-critical resources
+
+2. Virtual DOM:
+
+- Trade-off: Memory overhead for update efficiency
+- Best for complex, dynamic applications
+
+3. Measure First:
+
+- Always profile before optimizing
+- Chrome DevTools: Lighthouse, Performance tab
+- Key metrics: FCP, LCP, TTI, TBT
+
+### Implementation Checklist:
+
+- Audit critical resources with Lighthouse
+- Implement code splitting for large bundles
+- Use production builds (minification, tree-shaking)
+- Consider SSR/SSG for content-heavy sites
+- Evaluate virtual DOM frameworks based on project needs
