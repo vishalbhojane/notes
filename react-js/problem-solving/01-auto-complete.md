@@ -7,7 +7,7 @@ const Autocomplete = () => {
   const [loading, setLoading] = useState(false);
 
   // Fetch suggestions from API
-  const fetchSuggestions = async (searchQuery) => {
+  const fetchSuggestions = async searchQuery => {
     setLoading(true);
     try {
       const response = await fetch(
@@ -35,7 +35,7 @@ const Autocomplete = () => {
     return () => clearTimeout(timeoutId);
   }, [query]);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = event => {
     setQuery(event.target.value);
   };
 
@@ -53,7 +53,7 @@ const Autocomplete = () => {
 
       {suggestions.length > 0 && (
         <ul className="suggestions-list">
-          {suggestions.map((item) => (
+          {suggestions.map(item => (
             <li key={item.id}>{item.title}</li>
           ))}
         </ul>

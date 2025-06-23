@@ -9,7 +9,10 @@ A Map is an ordered collection of key-value pairs.
 ## Creating a Map:
 
 ```javascript
-const map = new Map([['a', 1], ['b', 2]]);
+const map = new Map([
+  ['a', 1],
+  ['b', 2],
+]);
 ```
 
 ## Map Operations:
@@ -38,7 +41,7 @@ map.size;
 
 ```javascript
 for (const [key, value] of map) {
-    console.log(key, value);
+  console.log(key, value);
 }
 ```
 

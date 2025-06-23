@@ -34,5 +34,5 @@ function RedAlert() {
 - You can pass arguments to event handlers using arrow functions or bind
 
 ```jsx
-<button onClick={(e) => handleClick(id, e)}>Click Me</button>
+<button onClick={e => handleClick(id, e)}>Click Me</button>
 ```

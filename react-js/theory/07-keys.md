@@ -17,7 +17,7 @@ When rendering lists of components, keys are crucial:
 
 ```jsx
 {
-  items.map((item) => <Component key={item.id}>{item}</Component>);
+  items.map(item => <Component key={item.id}>{item}</Component>);
 }
 ```
 

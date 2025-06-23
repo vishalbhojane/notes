@@ -26,7 +26,7 @@ export function fly(props) {
 // main.js
 import {drive} from './modules';
 
-const eventHandler = (event) => {
+const eventHandler = event => {
   event.preventDefault();
   drive({gas: event.target.value});
 };

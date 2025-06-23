@@ -1,6 +1,6 @@
 ```javascript
 Promise.myAllSettled = function (promises) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const results = [];
     let completed = 0;
 
@@ -11,14 +11,14 @@ Promise.myAllSettled = function (promises) {
 
     promises.forEach((promise, index) => {
       Promise.resolve(promise).then(
-        (value) => {
+        value => {
           results[index] = {status: 'fulfilled', value};
           completed++;
           if (completed === promises.length) {
             resolve(results);
           }
         },
-        (reason) => {
+        reason => {
           results[index] = {status: 'rejected', reason};
           completed++;
           if (completed === promises.length) {
@@ -71,7 +71,7 @@ Promise.myAllSettled([]).then(console.log);
 
 // Async operations
 Promise.myAllSettled([
-  new Promise((res) => setTimeout(() => res('done'), 100)),
+  new Promise(res => setTimeout(() => res('done'), 100)),
   new Promise((_, rej) => setTimeout(() => rej('failed'), 200)),
 ]).then(console.log);
 // [

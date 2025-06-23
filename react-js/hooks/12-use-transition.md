@@ -41,7 +41,7 @@ function SearchComponent() {
   const [deferredQuery, setDeferredQuery] = useState('');
   const [isPending, startTransition] = useTransition();
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setQuery(e.target.value);
     startTransition(() => {
       setDeferredQuery(e.target.value);

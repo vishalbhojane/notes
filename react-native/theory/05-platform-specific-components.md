@@ -63,7 +63,8 @@ import {Modal} from 'react-native';
   animationType="slide"
   onRequestClose={() => {
     this.setModalVisible(!this.state.modalVisible);
-  }}>
+  }}
+>
   {/* Modal content */}
 </Modal>;
 ```

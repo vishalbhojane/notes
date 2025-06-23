@@ -14,7 +14,7 @@ const FolderStructure = () => {
       children: isFolder ? [] : undefined,
     };
 
-    const addItemToNode = (node) => {
+    const addItemToNode = node => {
       if (node.id === parentId) {
         return {
           ...node,
@@ -27,10 +27,10 @@ const FolderStructure = () => {
       };
     };
 
-    setExplorerData((prev) => prev.map(addItemToNode));
+    setExplorerData(prev => prev.map(addItemToNode));
   };
 
-  return explorerData.map((item) => (
+  return explorerData.map(item => (
     <Folder key={item.id} root={item} onAddItem={handleAddItem} />
   ));
 };
@@ -45,10 +45,10 @@ const Folder = ({root, onAddItem}) => {
   const [expanded, setIsExpanded] = useState(false);
 
   const toggleFolder = () => {
-    setIsExpanded((prev) => !prev);
+    setIsExpanded(prev => !prev);
   };
 
-  const handleAddItem = (isFolder) => {
+  const handleAddItem = isFolder => {
     const itemName = prompt(`Enter the ${isFolder ? 'folder' : 'file'} name:`);
     if (itemName) {
       onAddItem(root.id, itemName, isFolder);
@@ -69,7 +69,7 @@ const Folder = ({root, onAddItem}) => {
           </div>
           {expanded && (
             <div style={{paddingLeft: '24px'}}>
-              {root.children?.map((child) => (
+              {root.children?.map(child => (
                 <Folder key={child.id} root={child} onAddItem={onAddItem} />
               ))}
             </div>

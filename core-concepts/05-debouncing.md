@@ -32,7 +32,7 @@ document.body.addEventListener('click', debouncedLogClick);
 ### With Arguments:
 
 ```javascript
-const logClick = (name) => console.log('click ' + name);
+const logClick = name => console.log('click ' + name);
 const debouncedLogClick = debounce(logClick, 1000);
 document.body.addEventListener('click', () => debouncedLogClick('vishal'));
 ```

@@ -44,7 +44,7 @@ function App() {
       <input
         type="number"
         value={number}
-        onChange={(e) => setNumber(parseInt(e.target.value))}
+        onChange={e => setNumber(parseInt(e.target.value))}
       />
       <ExpensiveCalculation number={number} />
       <button onClick={() => setCount(count + 1)}>

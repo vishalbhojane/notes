@@ -8,7 +8,7 @@ async function combineMarkdownFiles(folderPath, outputFilePath) {
 
     // Filter only .md files
     const mdFiles = files.filter(
-      (file) => path.extname(file).toLowerCase() === '.md'
+      file => path.extname(file).toLowerCase() === '.md'
     );
 
     let combinedContent = '';

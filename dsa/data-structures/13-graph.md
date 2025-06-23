@@ -1,20 +1,24 @@
 Introduction to Graphs:
+
 - A graph is a non-linear data structure consisting of vertices (or nodes) and edges that connect these vertices.
 - Graphs can be directed (edges have a direction) or undirected (edges have no direction).
 - They can be weighted (edges have associated costs) or unweighted.
 - Graphs can represent a wide variety of real-world relationships and networks.
 
 Key Components:
+
 1. Vertices (Nodes): The fundamental units of a graph
 2. Edges: Connections between vertices
 3. Adjacency: The relationship between directly connected vertices
 
 Common Graph Representations:
+
 1. Adjacency Matrix: A 2D array where `matrix[i][j]` represents an edge between vertex i and j
 2. Adjacency List: An array of lists, where each list contains the neighbors of a vertex
 3. Edge List: A list of all edges in the graph
 
 Basic Graph Operations:
+
 - Add vertex
 - Add edge
 - Remove vertex
@@ -22,16 +26,19 @@ Basic Graph Operations:
 - Check if an edge exists between two vertices
 
 Graph Traversal Algorithms:
+
 1. Depth-First Search (DFS)
 2. Breadth-First Search (BFS)
 
 Advanced Graph Algorithms:
+
 1. Shortest Path: Dijkstra's, Bellman-Ford
 2. Minimum Spanning Tree: Kruskal's, Prim's
 3. Topological Sorting
 4. Strongly Connected Components: Kosaraju's, Tarjan's
 
 Time Complexities (for adjacency list representation):
+
 - Add Vertex: O(1)
 - Add Edge: O(1)
 - Remove Vertex: O(|V| + |E|)
@@ -39,6 +46,7 @@ Time Complexities (for adjacency list representation):
 - DFS/BFS: O(|V| + |E|)
 
 Real-world applications of Graphs:
+
 1. Social Networks: Representing connections between people
 2. Geographic Information Systems: Mapping roads and locations
 3. Computer Networks: Modeling network topologies
@@ -50,6 +58,7 @@ Real-world applications of Graphs:
 9. Scheduling Problems: Task dependencies
 
 Types of Graphs:
+
 1. Simple Graph: No self-loops or multiple edges
 2. Multi-Graph: Allows multiple edges between vertices
 3. Pseudo Graph: Allows self-loops
@@ -60,11 +69,13 @@ Types of Graphs:
 8. Complete Graph: Every vertex is connected to every other vertex
 
 Advantages of Graphs:
+
 1. Flexible structure for representing complex relationships
 2. Efficient for querying relationships between elements
 3. Can model a wide variety of real-world scenarios
 
 Challenges with Graphs:
+
 1. Can be memory-intensive for large, dense graphs
 2. Some graph problems are computationally expensive (NP-hard)
 3. Choosing the right representation and algorithm is crucial for performance
@@ -114,8 +125,7 @@ class Graph {
 
   hasEdge(vertex1, vertex2) {
     return (
-      this.adjacencyList[vertex1] &&
-      this.adjacencyList[vertex1].has(vertex2)
+      this.adjacencyList[vertex1] && this.adjacencyList[vertex1].has(vertex2)
     );
   }
 
@@ -123,7 +133,7 @@ class Graph {
     const result = [];
     const visited = {};
 
-    const dfsHelper = (vertex) => {
+    const dfsHelper = vertex => {
       if (!vertex) return null;
       visited[vertex] = true;
       result.push(vertex);
@@ -132,7 +142,7 @@ class Graph {
           return dfsHelper(neighbor);
         }
       });
-    }
+    };
 
     dfsHelper(startVertex);
     return result;
@@ -185,23 +195,23 @@ graph.addEdge('B', 'D');
 graph.addEdge('C', 'D');
 
 // Print the graph
-console.log("Graph structure:");
+console.log('Graph structure:');
 graph.print();
 
 // Check if edge exists
-console.log("Edge between A and B:", graph.hasEdge('A', 'B')); // true
-console.log("Edge between A and D:", graph.hasEdge('A', 'D')); // false
+console.log('Edge between A and B:', graph.hasEdge('A', 'B')); // true
+console.log('Edge between A and D:', graph.hasEdge('A', 'D')); // false
 
 // Perform DFS starting from vertex 'A'
-console.log("DFS starting from A:", graph.dfs('A'));
+console.log('DFS starting from A:', graph.dfs('A'));
 
 // Perform BFS starting from vertex 'A'
-console.log("BFS starting from A:", graph.bfs('A'));
+console.log('BFS starting from A:', graph.bfs('A'));
 
 // Remove an edge and a vertex
 graph.removeEdge('A', 'C');
 graph.removeVertex('D');
 
-console.log("\nAfter removing edge A-C and vertex D:");
+console.log('\nAfter removing edge A-C and vertex D:');
 graph.print();
 ```

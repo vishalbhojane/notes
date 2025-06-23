@@ -1,4 +1,5 @@
 Introduction to Hash Table:
+
 - A Hash Table is a data structure that stores key-value pairs.
 - It uses a hash function to compute an index into an array of buckets or slots.
 - Ideal for quick insertion, deletion, and retrieval of data.
@@ -6,6 +7,7 @@ Introduction to Hash Table:
 - Handles collisions through methods like chaining or open addressing.
 
 Real-world examples of Hash Table usage:
+
 1. Database indexing
 2. Caching systems (e.g., web browser cache)
 3. Symbol tables in compilers and interpreters
@@ -96,7 +98,7 @@ class HashTable {
   print() {
     for (let i = 0; i < this.table.length; i++) {
       if (this.table[i]) {
-        console.log(i + ":");
+        console.log(i + ':');
         for (let j = 0; j < this.table[i].length; j++) {
           console.log(`   {${this.table[i][j][0]}, ${this.table[i][j][1]}}`);
         }
@@ -111,17 +113,17 @@ Usage
 ```javascript
 const ht = new HashTable();
 
-ht.set("grapes", 1000);
-ht.set("apples", 54);
-ht.set("oranges", 32);
+ht.set('grapes', 1000);
+ht.set('apples', 54);
+ht.set('oranges', 32);
 
 ht.print();
 
-console.log(ht.get("grapes")); // 1000
+console.log(ht.get('grapes')); // 1000
 console.log(ht.keys()); // ["grapes", "apples", "oranges"]
 console.log(ht.values()); // [1000, 54, 32]
 
-ht.remove("apples");
+ht.remove('apples');
 console.log(ht.keys()); // ["grapes", "oranges"]
 
 ht.clear();

@@ -32,7 +32,7 @@ console.log(onceAdd(5, 7)); // undefined
 console.log(onceAdd(1, 1)); // undefined
 
 // With different function
-const log = (msg) => `Logged: ${msg}`;
+const log = msg => `Logged: ${msg}`;
 const onceLog = once(log);
 
 console.log(onceLog('first')); // "Logged: first"

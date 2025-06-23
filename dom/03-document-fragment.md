@@ -21,9 +21,9 @@ const fragment = document.createDocumentFragment();
 // 2. Add Content to the Fragment
 const data = [0, 1, 2, 3, 4, 5];
 data.forEach(item => {
-    const li = document.createElement('li');
-    li.textContent = item;
-    fragment.appendChild(li);
+  const li = document.createElement('li');
+  li.textContent = item;
+  fragment.appendChild(li);
 });
 
 // 3. Insert the Fragment into the DOM
@@ -44,9 +44,9 @@ const fragment = document.createDocumentFragment();
 const ul = document.createElement('ul');
 
 listData.forEach(fruit => {
-    const li = document.createElement('li');
-    li.textContent = fruit;
-    fragment.appendChild(li);
+  const li = document.createElement('li');
+  li.textContent = fruit;
+  fragment.appendChild(li);
 });
 
 ul.appendChild(fragment);

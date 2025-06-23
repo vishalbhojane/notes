@@ -11,14 +11,14 @@ Promise.myAll = function (promises) {
 
     promises.forEach((promise, index) => {
       Promise.resolve(promise).then(
-        (value) => {
+        value => {
           results[index] = value;
           completed++;
           if (completed === promises.length) {
             resolve(results);
           }
         },
-        (reason) => {
+        reason => {
           reject(reason);
         }
       );
@@ -42,7 +42,7 @@ Promise.myAll([
 Promise.myAll([
   1,
   Promise.resolve(2),
-  new Promise((res) => setTimeout(() => res(3), 100)),
+  new Promise(res => setTimeout(() => res(3), 100)),
 ]).then(console.log);
 // [1, 2, 3]
 
@@ -58,8 +58,8 @@ Promise.myAll([Promise.resolve(1), Promise.reject('Error'), Promise.resolve(3)])
 
 // Async operations
 Promise.myAll([
-  new Promise((res) => setTimeout(() => res('first'), 200)),
-  new Promise((res) => setTimeout(() => res('second'), 100)),
+  new Promise(res => setTimeout(() => res('first'), 200)),
+  new Promise(res => setTimeout(() => res('second'), 100)),
 ]).then(console.log);
 // ['first', 'second']
 ```

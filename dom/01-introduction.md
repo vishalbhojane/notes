@@ -26,7 +26,7 @@ window.console.log('Hello'); // Same as console.log('Hello');
 
 ```javascript
 window.addEventListener('resize', () => {
-    console.log('Window resized');
+  console.log('Window resized');
 });
 ```
 

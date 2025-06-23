@@ -20,7 +20,7 @@ Usage
 
 ```javascript
 // Basic repeated execution
-const cancel1 = cancellable((x) => console.log(x), [5], 1000);
+const cancel1 = cancellable(x => console.log(x), [5], 1000);
 // Immediately: logs 5
 // Every 1s: logs 5
 cancel1(); // Stops after some time

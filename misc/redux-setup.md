@@ -75,7 +75,7 @@ import {View, Text} from 'react-native';
 import {actions} from './movieSlice';
 
 function MovieList() {
-  const movies = useSelector((state) => state.movies.list);
+  const movies = useSelector(state => state.movies.list);
   const dispatch = useDispatch();
 
   // Use dispatch to dispatch actions

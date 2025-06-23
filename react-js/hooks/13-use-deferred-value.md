@@ -53,7 +53,7 @@ function App() {
 
   return (
     <>
-      <input value={text} onChange={(e) => setText(e.target.value)} />
+      <input value={text} onChange={e => setText(e.target.value)} />
       <SlowList text={deferredText} />
     </>
   );

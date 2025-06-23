@@ -66,11 +66,11 @@ Core Logic: Left shifting by 1 is equivalent to multiplication by 2.
 Usage
 
 ```javascript
-console.log(isEven(4));           // true
-console.log(isPositive(5));       // true
-console.log(isPowerOfTwo(8));     // true
-console.log(divideByTwo(10));     // 5
-console.log(multiplyByTwo(3));    // 6
+console.log(isEven(4)); // true
+console.log(isPositive(5)); // true
+console.log(isPowerOfTwo(8)); // true
+console.log(divideByTwo(10)); // 5
+console.log(multiplyByTwo(3)); // 6
 ```
 
 ## Complexity

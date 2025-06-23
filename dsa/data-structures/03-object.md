@@ -11,21 +11,21 @@ An object is an unordered collection of key-value pairs.
 
 ```javascript
 const obj = {
-    name: 'vishal',
-    age: 28,
-    'key-three': true,
-    sayMyName: function() {
-        console.log(this.name);
-    }
+  name: 'vishal',
+  age: 28,
+  'key-three': true,
+  sayMyName: function () {
+    console.log(this.name);
+  },
 };
 ```
 
 ## Accessing Properties:
 
 ```javascript
-obj.name;            // Dot notation
-obj['name'];         // Bracket notation
-obj['key-three'];    // Bracket notation for keys with special characters
+obj.name; // Dot notation
+obj['name']; // Bracket notation
+obj['key-three']; // Bracket notation for keys with special characters
 ```
 
 ## Modifying Objects:
@@ -45,7 +45,7 @@ obj.sayMyName();
 
 ```javascript
 for (const key in obj) {
-    console.log(obj[key]);
+  console.log(obj[key]);
 }
 ```
 

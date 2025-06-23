@@ -1,4 +1,5 @@
 Introduction to Binary Search Tree:
+
 - A Binary Search Tree is a hierarchical data structure composed of nodes.
 - Each node contains a value and two references (links) to other nodes: left and right child.
 - For any given node, all values in its left subtree are less than the node's value, and all values in its right subtree are greater.
@@ -7,6 +8,7 @@ Introduction to Binary Search Tree:
 - Average time complexity for basic operations is O(log n), but can degrade to O(n) in worst cases (unbalanced tree).
 
 Real-world examples of Binary Search Tree usage:
+
 1. Implementing associative arrays (symbol tables)
 2. Database indexing for range queries
 3. File systems organization
@@ -14,28 +16,33 @@ Real-world examples of Binary Search Tree usage:
 5. Huffman coding trees in data compression algorithms
 
 Key operations and their average time complexities:
+
 - Insertion: O(log n)
 - Deletion: O(log n)
 - Search: O(log n)
 - Traversal (in-order, pre-order, post-order): O(n)
 
 Traversal
+
 - Preorder (Root, Left, Right)
 - Inorder (Left, Root, Right)
 - Postorder (Left, Right, Root)
 
 Advantages of BST:
+
 1. Maintains sorted data
 2. Allows for efficient range queries
 3. Relatively simple to implement compared to more complex tree structures
 4. Can be easily augmented to support additional operations
 
 Disadvantages of BST:
+
 1. Can become unbalanced, leading to worst-case O(n) time complexity
 2. No constant-time access to elements (unlike arrays)
 3. Requires more memory than arrays due to pointer overhead
 
 Variations and improvements:
+
 1. Self-balancing BSTs (e.g., AVL trees, Red-Black trees)
 2. Threaded Binary Trees
 3. Splay Trees
@@ -204,17 +211,17 @@ bst.insert(7);
 bst.insert(12);
 bst.insert(17);
 
-console.log(bst.find(7));  // true
-console.log(bst.find(9));  // false
+console.log(bst.find(7)); // true
+console.log(bst.find(9)); // false
 
-console.log(bst.min());  // 2
-console.log(bst.max());  // 17
+console.log(bst.min()); // 2
+console.log(bst.max()); // 17
 
-console.log(bst.bfs());  // [10, 5, 15, 2, 7, 12, 17]
-console.log(bst.dfsPreOrder());  // [10, 5, 2, 7, 15, 12, 17]
-console.log(bst.dfsInOrder());  // [2, 5, 7, 10, 12, 15, 17]
-console.log(bst.dfsPostOrder());  // [2, 7, 5, 12, 17, 15, 10]
+console.log(bst.bfs()); // [10, 5, 15, 2, 7, 12, 17]
+console.log(bst.dfsPreOrder()); // [10, 5, 2, 7, 15, 12, 17]
+console.log(bst.dfsInOrder()); // [2, 5, 7, 10, 12, 15, 17]
+console.log(bst.dfsPostOrder()); // [2, 7, 5, 12, 17, 15, 10]
 
 bst.remove(5);
-console.log(bst.dfsInOrder());  // [2, 7, 10, 12, 15, 17]
+console.log(bst.dfsInOrder()); // [2, 7, 10, 12, 15, 17]
 ```

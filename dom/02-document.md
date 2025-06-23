@@ -5,38 +5,38 @@ The `document` object provides access to and manipulation of the currently loade
 ### Accessing Document Elements:
 
 ```javascript
-document.documentElement  // Accesses the <html> element
-document.body             // Accesses the <body> element
+document.documentElement; // Accesses the <html> element
+document.body; // Accesses the <body> element
 ```
 
 ### Creating Elements:
 
 ```javascript
-const element = document.createElement("span");
-element.innerText = "Hello World";
+const element = document.createElement('span');
+element.innerText = 'Hello World';
 document.body.appendChild(element);
 ```
 
 ### Selecting Elements: 1. By ID:
 
 ```javascript
-const divWithId = document.getElementById("div-id");
+const divWithId = document.getElementById('div-id');
 ```
 
 2. By Class Name:
 
 ```javascript
-const divsWithClass = document.getElementsByClassName("div-class");
+const divsWithClass = document.getElementsByClassName('div-class');
 const divsWithClassArray = Array.from(divsWithClass);
 ```
 
 3. Using Query Selector:
 
 ```javascript
-document.querySelector("#id .class element");  // Returns first match
-document.querySelector('[data-test]');         // Selects by data attribute
-document.querySelector("input[type='text']");  // Selects specific input
-document.querySelector("body > input[type='text']");  // More specific selection
+document.querySelector('#id .class element'); // Returns first match
+document.querySelector('[data-test]'); // Selects by data attribute
+document.querySelector("input[type='text']"); // Selects specific input
+document.querySelector("body > input[type='text']"); // More specific selection
 ```
 
 4. Using Query Selector All:
@@ -48,13 +48,13 @@ const divsWithClasses = document.querySelectorAll('.div-class');
 ### Manipulating Elements:
 
 ```javascript
-divWithId.style.color = "red";  // Setting inline CSS
+divWithId.style.color = 'red'; // Setting inline CSS
 ```
 
 ### Working with NodeLists:
 
 ```javascript
-divsWithClasses.forEach(div => div.style.color = "red");
+divsWithClasses.forEach(div => (div.style.color = 'red'));
 ```
 
 ## Best Practices:

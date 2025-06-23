@@ -22,15 +22,15 @@ addTwoPromises(Promise.resolve(2), Promise.resolve(3)).then(console.log);
 
 // Different resolution times
 addTwoPromises(
-  new Promise((res) => setTimeout(() => res(10), 100)),
-  new Promise((res) => setTimeout(() => res(20), 200))
+  new Promise(res => setTimeout(() => res(10), 100)),
+  new Promise(res => setTimeout(() => res(20), 200))
 ).then(console.log);
 // 30
 
 // Mix of sync and async
 addTwoPromises(
   Promise.resolve(5),
-  new Promise((res) => setTimeout(() => res(7), 100))
+  new Promise(res => setTimeout(() => res(7), 100))
 ).then(console.log);
 // 12
 

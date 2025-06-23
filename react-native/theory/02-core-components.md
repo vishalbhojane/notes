@@ -102,7 +102,7 @@ const MyComponent = () => (
   <FlatList
     data={DATA}
     renderItem={({item}) => <Text>{item.title}</Text>}
-    keyExtractor={(item) => item.id}
+    keyExtractor={item => item.id}
   />
 );
 ```

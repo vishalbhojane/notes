@@ -24,7 +24,7 @@ class EventEmitter {
     return {
       unsubscribe: () => {
         this.events[eventName] = this.events[eventName].filter(
-          (cb) => cb !== callback
+          cb => cb !== callback
         );
         if (this.events[eventName].length === 0) {
           delete this.events[eventName];
@@ -37,7 +37,7 @@ class EventEmitter {
     if (!this.events[eventName]) {
       return [];
     }
-    return this.events[eventName].map((cb) => cb(...args));
+    return this.events[eventName].map(cb => cb(...args));
   }
 }
 ```
@@ -48,9 +48,9 @@ class EventEmitter {
 const emitter = new EventEmitter();
 
 // Subscribe to events
-const sub1 = emitter.subscribe('onClick', (x) => x + 1);
-const sub2 = emitter.subscribe('onClick', (x) => x + 2);
-const sub3 = emitter.subscribe('onKeyPress', (key) => key.toUpperCase());
+const sub1 = emitter.subscribe('onClick', x => x + 1);
+const sub2 = emitter.subscribe('onClick', x => x + 2);
+const sub3 = emitter.subscribe('onKeyPress', key => key.toUpperCase());
 
 // Emit events and get results
 console.log(emitter.emit('onClick', [5]));

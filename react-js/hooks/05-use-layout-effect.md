@@ -49,7 +49,8 @@ function Tooltip({text, children}) {
           background: 'black',
           color: 'white',
           padding: '5px',
-        }}>
+        }}
+      >
         {text}
       </div>
     </div>

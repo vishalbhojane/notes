@@ -3,6 +3,7 @@ CORS is a security mechanism that allows web applications to request resources f
 ## Before CORS
 
 Restrictions prevented `https://vishal.com` from accessing resources from:
+
 - `google.com/api/getData`
 - `api.vishal.com`
 - `vishal.com:5050`

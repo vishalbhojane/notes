@@ -21,7 +21,7 @@ const set = new Set([1, 2, 3]);
 set.add(4);
 
 // Check if a value exists
-set.has(4);  // Returns true or false
+set.has(4); // Returns true or false
 
 // Delete a value
 set.delete(4);
@@ -37,7 +37,7 @@ set.size;
 
 ```javascript
 for (const item of set) {
-    console.log(item);
+  console.log(item);
 }
 ```
 

@@ -12,7 +12,7 @@ Currying is a technique of transforming a function with multiple arguments into 
 
 ```javascript
 const multiply = (x, y) => x * y;
-const multiplyByTwo = (y) => 2 * y;
+const multiplyByTwo = y => 2 * y;
 ```
 
 ### Currying using `bind()`:
@@ -25,7 +25,7 @@ multiplyByTwo_Bind(3); // Returns 6
 ### Currying using Closures:
 
 ```javascript
-const multiplyNew = (x) => (y) => x * y;
+const multiplyNew = x => y => x * y;
 const multiplyByTwo_Closure = multiplyNew(2);
 multiplyByTwo_Closure(3); // Returns 6
 ```

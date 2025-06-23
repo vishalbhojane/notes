@@ -56,7 +56,7 @@ function todoReducer(state, action) {
         {id: Date.now(), text: action.payload, completed: false},
       ];
     case 'TOGGLE_TODO':
-      return state.map((todo) =>
+      return state.map(todo =>
         todo.id === action.payload
           ? {...todo, completed: !todo.completed}
           : todo
@@ -70,7 +70,7 @@ function TodoList() {
   const [todos, dispatch] = useReducer(todoReducer, []);
   const [text, setText] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     dispatch({type: 'ADD_TODO', payload: text});
     setText('');
@@ -79,15 +79,16 @@ function TodoList() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input value={text} onChange={(e) => setText(e.target.value)} />
+        <input value={text} onChange={e => setText(e.target.value)} />
         <button type="submit">Add Todo</button>
       </form>
       <ul>
-        {todos.map((todo) => (
+        {todos.map(todo => (
           <li
             key={todo.id}
             onClick={() => dispatch({type: 'TOGGLE_TODO', payload: todo.id})}
-            style={{textDecoration: todo.completed ? 'line-through' : 'none'}}>
+            style={{textDecoration: todo.completed ? 'line-through' : 'none'}}
+          >
             {todo.text}
           </li>
         ))}

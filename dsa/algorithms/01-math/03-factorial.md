@@ -4,17 +4,18 @@ Create a function `factorial(n)` that calculates the factorial of a non-negative
 
 ```javascript
 function factorial(n) {
-    let result = 1;
+  let result = 1;
 
-    for (let i = 2; i <= n; i++) {
-        result *= i;
-    }
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
 
-    return result;
+  return result;
 }
 ```
 
 Core Logic:
+
 1. Initialize the result to 1.
 2. Multiply the result by each integer from 2 to n.
 3. Return the final product.
@@ -23,15 +24,16 @@ Core Logic:
 
 ```javascript
 function factorial(n) {
-    if (n === 0) {
-        return 1;
-    }
+  if (n === 0) {
+    return 1;
+  }
 
-    return n * factorial(n - 1);
+  return n * factorial(n - 1);
 }
 ```
 
 Core Logic:
+
 1. Base case: if n is 0, return 1 (0! is defined as 1).
 2. Recursive case: return n multiplied by the factorial of (n-1).
 
@@ -55,9 +57,11 @@ Recursive Logic Breakdown:
 ## Complexity
 
 Iterative Approach:
+
 - Time Complexity: O(n), where n is the input number.
 - Space Complexity: O(1), as it uses a constant amount of extra space.
 
 Recursive Approach:
+
 - Time Complexity: O(n), where n is the input number.
 - Space Complexity: O(n) due to the call stack.

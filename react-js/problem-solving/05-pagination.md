@@ -18,7 +18,8 @@ const Pagination = ({
             className={`pagination-item ${
               index === activePage ? 'active-page' : ''
             }`}
-            onClick={() => onPageChange(index)}>
+            onClick={() => onPageChange(index)}
+          >
             {index + 1}
           </span>
         )
@@ -55,14 +56,14 @@ const ProductListing = () => {
         numberOfItems={data.length}
         itemsPerPage={ITEMS_PER_PAGE}
         activePage={activePage}
-        onPageChange={(page) => setActivePage(page)}
+        onPageChange={page => setActivePage(page)}
       />
       {data
         .slice(
           activePage * ITEMS_PER_PAGE,
           activePage * ITEMS_PER_PAGE + ITEMS_PER_PAGE
         )
-        .map((item) => (
+        .map(item => (
           <div>
             <div>{item.title}</div>
           </div>

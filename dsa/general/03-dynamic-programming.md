@@ -5,6 +5,7 @@ Dynamic Programming is an algorithmic paradigm that solves complex problems by b
 A problem has optimal substructure if an optimal solution can be constructed from optimal solutions of its subproblems.
 
 Examples:
+
 - Shortest Path Problem
 - Knapsack Problem
 
@@ -13,6 +14,7 @@ Examples:
 This occurs when a problem's subproblems are solved multiple times. Dynamic programming stores these results to avoid redundant calculations.
 
 Examples:
+
 - Fibonacci Sequence
 - Coin Change Problem
 
@@ -33,7 +35,7 @@ function fib(n) {
 function fib(n, memo = []) {
   if (memo[n] !== undefined) return memo[n];
   if (n <= 1) return n;
-  return memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
+  return (memo[n] = fib(n - 1, memo) + fib(n - 2, memo));
 }
 ```
 

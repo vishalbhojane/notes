@@ -35,7 +35,7 @@ const store = {
   },
   increment() {
     value++;
-    listeners.forEach((listener) => listener());
+    listeners.forEach(listener => listener());
   },
 };
 
@@ -68,7 +68,7 @@ function useReduxState(selector) {
 }
 
 function MyComponent() {
-  const user = useReduxState((state) => state.user);
+  const user = useReduxState(state => state.user);
 
   return <div>User: {user.name}</div>;
 }

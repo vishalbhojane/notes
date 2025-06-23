@@ -14,19 +14,19 @@ class MyPromise {
     this.fulfilledCallbacks = [];
     this.rejectedCallbacks = [];
 
-    const resolve = (value) => {
+    const resolve = value => {
       if (this.state === MyPromise.PENDING) {
         this.state = MyPromise.FULFILLED;
         this.result = value;
-        this.fulfilledCallbacks.forEach((callback) => callback(this.result));
+        this.fulfilledCallbacks.forEach(callback => callback(this.result));
       }
     };
 
-    const reject = (reason) => {
+    const reject = reason => {
       if (this.state === MyPromise.PENDING) {
         this.state = MyPromise.REJECTED;
         this.result = reason;
-        this.rejectedCallbacks.forEach((callback) => callback(this.result));
+        this.rejectedCallbacks.forEach(callback => callback(this.result));
       }
     };
 
@@ -39,16 +39,16 @@ class MyPromise {
 
   then(onFulfilled, onRejected) {
     onFulfilled =
-      typeof onFulfilled === 'function' ? onFulfilled : (value) => value;
+      typeof onFulfilled === 'function' ? onFulfilled : value => value;
     onRejected =
       typeof onRejected === 'function'
         ? onRejected
-        : (reason) => {
+        : reason => {
             throw reason;
           };
 
     const chainedPromise = new MyPromise((resolve, reject) => {
-      const handleFulfilled = (value) => {
+      const handleFulfilled = value => {
         setTimeout(() => {
           try {
             const returnedValue = onFulfilled(value);
@@ -64,7 +64,7 @@ class MyPromise {
         }, 0);
       };
 
-      const handleRejected = (reason) => {
+      const handleRejected = reason => {
         setTimeout(() => {
           try {
             const returnedValue = onRejected(reason);
@@ -115,12 +115,12 @@ class MyPromise {
         if (typeof thenMethod === 'function') {
           thenMethod.call(
             returnedValue,
-            (newValue) => {
+            newValue => {
               if (alreadyResolved) return;
               alreadyResolved = true;
               MyPromise.resolvePromise(promise, newValue, resolve, reject);
             },
-            (rejectionReason) => {
+            rejectionReason => {
               if (alreadyResolved) return;
               alreadyResolved = true;
               reject(rejectionReason);
@@ -147,7 +147,7 @@ class MyPromise {
 
 ```javascript
 MyPromise.resolve = function (value) {
-  return new MyPromise((resolve) => {
+  return new MyPromise(resolve => {
     resolve(value);
   });
 };
@@ -173,7 +173,7 @@ MyPromise.all = function (promiseArray) {
 
     promiseArray.forEach((promise, index) => {
       MyPromise.resolve(promise).then(
-        (value) => {
+        value => {
           results[index] = value;
           settledCount++;
 
@@ -181,7 +181,7 @@ MyPromise.all = function (promiseArray) {
             resolve(results);
           }
         },
-        (reason) => reject(reason)
+        reason => reject(reason)
       );
     });
   });
@@ -197,7 +197,7 @@ MyPromise.race = function (promiseArray) {
       return;
     }
 
-    promiseArray.forEach((promise) => {
+    promiseArray.forEach(promise => {
       MyPromise.resolve(promise).then(resolve, reject);
     });
   });
@@ -218,7 +218,7 @@ MyPromise.allSettled = function (promiseArray) {
 
     promiseArray.forEach((promise, index) => {
       MyPromise.resolve(promise).then(
-        (value) => {
+        value => {
           results[index] = {status: 'fulfilled', value};
           settledCount++;
 
@@ -226,7 +226,7 @@ MyPromise.allSettled = function (promiseArray) {
             resolve(results);
           }
         },
-        (reason) => {
+        reason => {
           results[index] = {status: 'rejected', reason};
           settledCount++;
 
@@ -255,10 +255,10 @@ MyPromise.any = function (promiseArray) {
 
     promiseArray.forEach((promise, index) => {
       MyPromise.resolve(promise).then(
-        (value) => {
+        value => {
           resolve(value);
         },
-        (error) => {
+        error => {
           errors[index] = error;
           rejectedCount++;
 

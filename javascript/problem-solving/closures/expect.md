@@ -10,11 +10,11 @@ It should:
 ```javascript
 function expect(value) {
   return {
-    toBe: (target) => {
+    toBe: target => {
       if (value === target) return true;
       throw new Error('Not Equal');
     },
-    notToBe: (target) => {
+    notToBe: target => {
       if (value !== target) return true;
       throw new Error('Equal');
     },

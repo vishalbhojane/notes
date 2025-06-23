@@ -23,36 +23,36 @@ A queue is a sequential collection of elements that follows the First In First O
 
 ```js
 class Queue {
-    constructor() {
-        this.items = [];
-    }
+  constructor() {
+    this.items = [];
+  }
 
-    enqueue(element) {
-        this.items.push(element);
-    }
+  enqueue(element) {
+    this.items.push(element);
+  }
 
-    dequeue() {
-        return this.items.shift();
-    }
+  dequeue() {
+    return this.items.shift();
+  }
 
-    peek() {
-        if (!this.isEmpty()) {
-            return this.items[0];
-        }
-        return undefined;
+  peek() {
+    if (!this.isEmpty()) {
+      return this.items[0];
     }
+    return undefined;
+  }
 
-    size() {
-        return this.items.length;
-    }
+  size() {
+    return this.items.length;
+  }
 
-    isEmpty() {
-        return this.items.length === 0;
-    }
+  isEmpty() {
+    return this.items.length === 0;
+  }
 
-    print() {
-        console.log(this.items.toString());
-    }
+  print() {
+    console.log(this.items.toString());
+  }
 }
 ```
 
@@ -60,42 +60,41 @@ class Queue {
 
 ```javascript
 class Queue {
-    constructor() {
-        this.items = {};
-        this.front = 0;
-        this.rear = 0;
-    }
+  constructor() {
+    this.items = {};
+    this.front = 0;
+    this.rear = 0;
+  }
 
-    enqueue(element) {
-        this.items[this.rear] = element;
-        this.rear++;
-    }
+  enqueue(element) {
+    this.items[this.rear] = element;
+    this.rear++;
+  }
 
-    dequeue() {
-        if (this.isEmpty()) {
-            return undefined;
-        }
-        const item = this.items[this.front];
-        delete this.items[this.front];
-        this.front++;
-        return item;
+  dequeue() {
+    if (this.isEmpty()) {
+      return undefined;
     }
+    const item = this.items[this.front];
+    delete this.items[this.front];
+    this.front++;
+    return item;
+  }
 
-    peek() {
-        return this.isEmpty() ? undefined : this.items[this.front];
-    }
+  peek() {
+    return this.isEmpty() ? undefined : this.items[this.front];
+  }
 
-    size() {
-        return this.rear - this.front;
-    }
+  size() {
+    return this.rear - this.front;
+  }
 
-    isEmpty() {
-        return this.rear - this.front === 0;
-    }
+  isEmpty() {
+    return this.rear - this.front === 0;
+  }
 
-    print() {
-        console.log(this.items);
-    }
+  print() {
+    console.log(this.items);
+  }
 }
 ```
-

@@ -7,7 +7,7 @@ const TicTacToe = () => {
   const [isXTurn, setIsXTurn] = useState(false);
   const boardRef = useRef(board);
 
-  const checkWinner = (board) => {
+  const checkWinner = board => {
     const winningSequence = [
       [0, 1, 2],
       [0, 4, 8],
@@ -30,7 +30,7 @@ const TicTacToe = () => {
     return null;
   };
 
-  const handleBoxClick = (i) => {
+  const handleBoxClick = i => {
     if (board[i] || checkWinner(boardRef.current)) {
       return;
     }
@@ -40,7 +40,7 @@ const TicTacToe = () => {
     boardRef.current = newBoard;
     checkWinner(boardRef.current);
     setBoard(newBoard);
-    setIsXTurn((prev) => !prev);
+    setIsXTurn(prev => !prev);
     checkWinner(board);
   };
 

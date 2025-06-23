@@ -11,7 +11,7 @@ Controlled Components are the elements whose values are controlled by React stat
 function ControlledComponent() {
   const [value, setValue] = useState('');
 
-  return <input value={value} onChange={(e) => setValue(e.target.value)} />;
+  return <input value={value} onChange={e => setValue(e.target.value)} />;
 }
 ```
 

@@ -181,7 +181,3 @@ list.printList(); // 3 -> 2 -> 1 -> null
 console.log(list.pop()); // 1
 list.printList(); // 3 -> 2 -> null
 ```
-
-
-
-

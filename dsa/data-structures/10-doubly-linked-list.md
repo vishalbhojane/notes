@@ -175,7 +175,7 @@ class DoublyLinkedList {
     if (!this.head) return;
     let temp = null;
     let current = this.head;
-    
+
     // Swap head and tail
     this.tail = this.head;
     this.head = this.tail;
@@ -187,7 +187,7 @@ class DoublyLinkedList {
       current = current.prev;
     }
 
-    // If the list has only one node, 
+    // If the list has only one node,
     // we don't need to do anything else
     if (temp !== null) {
       this.head = temp.prev;

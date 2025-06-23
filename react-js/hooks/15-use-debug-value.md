@@ -25,10 +25,10 @@ import {useState, useDebugValue} from 'react';
 function useCustomCounter(initialCount = 0) {
   const [count, setCount] = useState(initialCount);
 
-  useDebugValue(count, (count) => `Current count: ${count}`);
+  useDebugValue(count, count => `Current count: ${count}`);
 
-  const increment = () => setCount((c) => c + 1);
-  const decrement = () => setCount((c) => c - 1);
+  const increment = () => setCount(c => c + 1);
+  const decrement = () => setCount(c => c - 1);
 
   return {count, increment, decrement};
 }
@@ -68,7 +68,7 @@ function useUserStatus(userId) {
 
   // ... logic to check user status
 
-  useDebugValue(isOnline, (online) =>
+  useDebugValue(isOnline, online =>
     online === null ? 'loading' : online ? 'online' : 'offline'
   );
 

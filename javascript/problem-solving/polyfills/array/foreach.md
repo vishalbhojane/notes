@@ -10,7 +10,7 @@ Usage
 
 ```javascript
 // Basic usage
-[1, 2, 3].myForEach((x) => console.log(x));
+[1, 2, 3].myForEach(x => console.log(x));
 // 1
 // 2
 // 3
@@ -35,6 +35,6 @@ const sum = {val: 0};
 console.log(sum.val); // 6
 
 // Empty array
-[].myForEach((x) => console.log(x));
+[].myForEach(x => console.log(x));
 // (nothing printed)
 ```

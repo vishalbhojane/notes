@@ -11,14 +11,14 @@ DOM traversal is the process of navigating through different elements in an HTML
 
 ```html
 <div class="grandparent">
-    <div class="parent">
-        <div class="children"></div>
-        <div class="children"></div>
-    </div>
-    <div class="parent">
-        <div class="children"></div>
-        <div class="children"></div>
-    </div>
+  <div class="parent">
+    <div class="children"></div>
+    <div class="children"></div>
+  </div>
+  <div class="parent">
+    <div class="children"></div>
+    <div class="children"></div>
+  </div>
 </div>
 ```
 
@@ -30,27 +30,29 @@ const parentEl = document.querySelector('.parent');
 const childrenEl = document.querySelector('.children'); // First matching .children
 
 // Accessing children
-grandParentEl.children;                    // HTMLCollection of .parent elements
-grandParentEl.children[0];                 // First .parent
-grandParentEl.children[1];                 // Second .parent
+grandParentEl.children; // HTMLCollection of .parent elements
+grandParentEl.children[0]; // First .parent
+grandParentEl.children[1]; // Second .parent
 
 // Sibling navigation
 grandParentEl.children[0].nextElementSibling; // Second .parent
 
 // Accessing parents
-childrenEl.parentElement;                  // .parent
-parentEl.parentElement;                    // .grandparent
+childrenEl.parentElement; // .parent
+parentEl.parentElement; // .grandparent
 
 // Using closest() for ancestors
-childrenEl.closest('.parent');             // Immediate .parent
-childrenEl.closest('.grandparent');        // Immediate .grandparent
+childrenEl.closest('.parent'); // Immediate .parent
+childrenEl.closest('.grandparent'); // Immediate .grandparent
 ```
 
 ## Querying Within Elements:
 
 ```javascript
 // Styling all .children within grandParentEl
-grandParentEl.querySelectorAll(".children").forEach(el => el.style.color = 'red');
+grandParentEl
+  .querySelectorAll('.children')
+  .forEach(el => (el.style.color = 'red'));
 ```
 
 ## Best Practices:

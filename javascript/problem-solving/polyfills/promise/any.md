@@ -9,12 +9,12 @@ Promise.myAny = function (promises) {
       return;
     }
 
-    promises.forEach((promise) => {
+    promises.forEach(promise => {
       Promise.resolve(promise).then(
-        (value) => {
+        value => {
           resolve(value);
         },
-        (reason) => {
+        reason => {
           errors.push(reason);
           completed++;
           if (completed === promises.length) {
@@ -40,22 +40,22 @@ Promise.myAny([
 
 // First to resolve wins
 Promise.myAny([
-  new Promise((res) => setTimeout(() => res('slow'), 200)),
-  new Promise((res) => setTimeout(() => res('fast'), 100)),
+  new Promise(res => setTimeout(() => res('slow'), 200)),
+  new Promise(res => setTimeout(() => res('fast'), 100)),
 ]).then(console.log);
 // "fast"
 
 // All rejected
 Promise.myAny([Promise.reject('Error 1'), Promise.reject('Error 2')])
   .then(console.log)
-  .catch((e) => {
+  .catch(e => {
     console.log(e instanceof AggregateError); // true
     console.log(e.errors); // ['Error 1', 'Error 2']
     console.log(e.message); // "All promises were rejected"
   });
 
 // Empty array
-Promise.myAny([]).catch((e) => {
+Promise.myAny([]).catch(e => {
   console.log(e instanceof AggregateError); // true
   console.log(e.errors); // []
   console.log(e.message); // "All promises were rejected"

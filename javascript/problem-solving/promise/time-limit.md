@@ -25,7 +25,7 @@ function timeLimit(func, delay) {
 ```javascript
 // Completes within time limit
 const success = timeLimit(async () => {
-  await new Promise((res) => setTimeout(res, 100));
+  await new Promise(res => setTimeout(res, 100));
   return 'Success';
 }, 200);
 
@@ -34,7 +34,7 @@ success().then(console.log);
 
 // Exceeds time limit
 const fail = timeLimit(async () => {
-  await new Promise((res) => setTimeout(res, 200));
+  await new Promise(res => setTimeout(res, 200));
   return 'Never seen';
 }, 100);
 
@@ -48,7 +48,7 @@ instant().then(console.log);
 
 // With parameters
 const delayed = timeLimit(async (a, b) => {
-  await new Promise((res) => setTimeout(res, 50));
+  await new Promise(res => setTimeout(res, 50));
   return a + b;
 }, 100);
 

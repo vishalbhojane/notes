@@ -9,7 +9,7 @@ It should:
 
 ```js
 function retryPromise(func, attempts) {
-  return func().catch((err) => {
+  return func().catch(err => {
     if (attempts > 0) {
       console.log(`Retrying... (${attempts} attempts left)`);
       return retryPromise(func, attempts - 1);

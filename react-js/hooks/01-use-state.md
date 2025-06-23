@@ -34,7 +34,7 @@ function Counter() {
     <>
       <p>Count: {count}</p>
       <button onClick={() => setCount(count + 1)}>Increment</button>
-      <button onClick={() => setCount((prevCount) => prevCount - 1)}>
+      <button onClick={() => setCount(prevCount => prevCount - 1)}>
         Decrement
       </button>
     </>
@@ -48,8 +48,8 @@ function Counter() {
 function Form() {
   const [form, setForm] = useState({name: '', email: ''});
 
-  const handleChange = (e) => {
-    setForm((prevForm) => ({
+  const handleChange = e => {
+    setForm(prevForm => ({
       ...prevForm,
       [e.target.name]: e.target.value,
     }));

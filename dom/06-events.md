@@ -9,7 +9,7 @@ HTML events are actions that occur on HTML elements, which JavaScript can respon
 ## Event Syntax
 
 ```html
-<element event="some JavaScript">
+<element event="some JavaScript"></element>
 ```
 
 Example:

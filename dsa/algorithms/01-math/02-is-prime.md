@@ -4,21 +4,22 @@ Create a function `isPrime(n)` that determines whether a given number is prime. 
 
 ```javascript
 function isPrime(n) {
-    if (n < 2) {
-        return false;
-    }
+  if (n < 2) {
+    return false;
+  }
 
-    for (let i = 2; i <= Math.sqrt(n); i++) {
-        if (n % i === 0) {
-            return false;
-        }
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    if (n % i === 0) {
+      return false;
     }
+  }
 
-    return true;
+  return true;
 }
 ```
 
 Core Logic:
+
 1. If the number is less than 2, it's not prime.
 2. Check for divisibility only up to the square root of n.
 3. If any number divides n without a remainder, n is not prime.
@@ -27,10 +28,10 @@ Core Logic:
 Usage
 
 ```javascript
-console.log(isPrime(7));  // true
+console.log(isPrime(7)); // true
 console.log(isPrime(17)); // true
 console.log(isPrime(41)); // true
-console.log(isPrime(4));  // false
+console.log(isPrime(4)); // false
 ```
 
 ## Complexity

@@ -17,22 +17,22 @@ function sortBy(arr, fn) {
 
 ```javascript
 // Sort numbers
-console.log(sortBy([5, 4, 1, 2, 3], (x) => x));
+console.log(sortBy([5, 4, 1, 2, 3], x => x));
 // [1,2,3,4,5]
 
 // Sort by computed value
-console.log(sortBy([1, 2, 3, 4], (x) => -x));
+console.log(sortBy([1, 2, 3, 4], x => -x));
 // [4,3,2,1]
 
 // Sort objects by property
-console.log(sortBy([{x: 3}, {x: 1}, {x: 2}], (obj) => obj.x));
+console.log(sortBy([{x: 3}, {x: 1}, {x: 2}], obj => obj.x));
 // [{x: 1}, {x: 2}, {x: 3}]
 
 // Sort by transformation
-console.log(sortBy([-2, -1, 0, 1, 2], (x) => Math.abs(x)));
+console.log(sortBy([-2, -1, 0, 1, 2], x => Math.abs(x)));
 // [0,1,-1,2,-2]
 
 // Empty array
-console.log(sortBy([], (x) => x));
+console.log(sortBy([], x => x));
 // []
 ```

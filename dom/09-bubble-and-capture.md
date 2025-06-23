@@ -4,7 +4,7 @@ Event bubbling and capturing are two phases of event propagation in the HTML DOM
 
 - **Bubbling**: Event starts from the target element and bubbles up to the root.
 - **Capturing**: Event starts from the root and trickles down to the target element.
-- Remember: *Trickle down (Capturing), Bubble up (Bubbling)*
+- Remember: _Trickle down (Capturing), Bubble up (Bubbling)_
 
 ## Event Flow
 
@@ -24,28 +24,33 @@ Capture is off by default. Enable it with `{capture: true}` in `addEventListener
 
 ```html
 <div id="grandparent">
-    <div id="parent">
-        <div id="child"></div>
-    </div>
+  <div id="parent">
+    <div id="child"></div>
+  </div>
 </div>
 ```
 
 ```javascript
-document.querySelector("#grandparent").addEventListener('click', (e) => {
-    console.log("Grandparent Clicked!");
+document.querySelector('#grandparent').addEventListener(
+  'click',
+  e => {
+    console.log('Grandparent Clicked!');
     // e.stopPropagation();
-}, { capture: true });
+  },
+  {capture: true}
+);
 
-document.querySelector("#parent").addEventListener('click', (e) => {
-    console.log("Parent Clicked!");
+document.querySelector('#parent').addEventListener('click', e => {
+  console.log('Parent Clicked!');
 });
 
-document.querySelector("#child").addEventListener('click', (e) => {
-    console.log("Child Clicked!");
+document.querySelector('#child').addEventListener('click', e => {
+  console.log('Child Clicked!');
 });
 ```
 
 Note: With capture enabled on grandparent, clicking the child will log:
+
 1. "Grandparent Clicked!" (capturing phase)
 2. "Child Clicked!" (target phase)
 3. "Parent Clicked!" (bubbling phase)

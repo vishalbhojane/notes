@@ -18,11 +18,11 @@ Usage
 
 ```javascript
 // Basic delayed execution
-const cancel1 = cancellable((x) => console.log(x), [5], 1000);
+const cancel1 = cancellable(x => console.log(x), [5], 1000);
 // After 1s: logs 5
 
 // Cancel before execution
-const cancel2 = cancellable((x) => console.log(x), [10], 2000);
+const cancel2 = cancellable(x => console.log(x), [10], 2000);
 cancel2(); // Cancels the timeout
 // Nothing logged
 

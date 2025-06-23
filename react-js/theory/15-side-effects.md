@@ -19,7 +19,7 @@ Side effects are operations that interact with the world outside of the React co
 
 ```jsx
 useEffect(() => {
-  fetchData().then((data) => {
+  fetchData().then(data => {
     // Handle the fetched data
   });
 }, []); // Runs only when the component mounts

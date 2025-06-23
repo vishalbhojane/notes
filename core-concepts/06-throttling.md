@@ -52,7 +52,7 @@ document.body.addEventListener('click', throttledLogClick);
 ### With Arguments:
 
 ```javascript
-const logClick = (name) => console.log('click ' + name);
+const logClick = name => console.log('click ' + name);
 const throttledLogClick = throttle(logClick, 1000);
 document.body.addEventListener('click', () => throttledLogClick('vishal'));
 ```

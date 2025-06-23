@@ -11,7 +11,7 @@ It should:
 function join(left, right) {
   const merged = {};
 
-  [...left, ...right].forEach((item) => {
+  [...left, ...right].forEach(item => {
     merged[item.id] = {...merged[item.id], ...item};
   });
 

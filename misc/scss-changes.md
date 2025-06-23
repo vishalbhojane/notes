@@ -344,12 +344,12 @@ sass
       },
     ],
     functions: {
-      'custom-function($arg)': (args) => {
+      'custom-function($arg)': args => {
         // Custom function logic using modern Value class
       },
     },
   })
-  .then((result) => {
+  .then(result => {
     // Promise resolution logic
   });
 

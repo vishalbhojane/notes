@@ -19,11 +19,11 @@ const executeConcurrentTasks = async (tasks, limit) => {
     }
 
     const promise = tasks[idx](idx)
-      .then((result) => {
+      .then(result => {
         results[idx] = result;
         pending.delete(promise);
       })
-      .catch((err) => {
+      .catch(err => {
         errors[idx] = err;
         results[idx] = null;
         pending.delete(promise);
@@ -42,9 +42,9 @@ const executeConcurrentTasks = async (tasks, limit) => {
 ```javascript
 // Simple tasks
 const tasks = [
-  (i) => Promise.resolve(`Task ${i} done`),
-  (i) => Promise.resolve(`Task ${i} done`),
-  (i) => Promise.resolve(`Task ${i} done`),
+  i => Promise.resolve(`Task ${i} done`),
+  i => Promise.resolve(`Task ${i} done`),
+  i => Promise.resolve(`Task ${i} done`),
 ];
 
 executeConcurrentTasks(tasks, 2).then(console.log);
@@ -55,9 +55,9 @@ executeConcurrentTasks(tasks, 2).then(console.log);
 
 // Mix of success and failure
 const mixedTasks = [
-  (i) => Promise.resolve(`Success ${i}`),
-  (i) => Promise.reject(`Error ${i}`),
-  (i) => Promise.resolve(`Success ${i}`),
+  i => Promise.resolve(`Success ${i}`),
+  i => Promise.reject(`Error ${i}`),
+  i => Promise.resolve(`Success ${i}`),
 ];
 
 executeConcurrentTasks(mixedTasks, 2).then(console.log);
@@ -68,9 +68,9 @@ executeConcurrentTasks(mixedTasks, 2).then(console.log);
 
 // Async tasks with different durations
 const delayedTasks = [
-  (i) => new Promise((res) => setTimeout(() => res(`Slow ${i}`), 200)),
-  (i) => new Promise((res) => setTimeout(() => res(`Fast ${i}`), 100)),
-  (i) => new Promise((res) => setTimeout(() => res(`Medium ${i}`), 150)),
+  i => new Promise(res => setTimeout(() => res(`Slow ${i}`), 200)),
+  i => new Promise(res => setTimeout(() => res(`Fast ${i}`), 100)),
+  i => new Promise(res => setTimeout(() => res(`Medium ${i}`), 150)),
 ];
 
 executeConcurrentTasks(delayedTasks, 2).then(console.log);

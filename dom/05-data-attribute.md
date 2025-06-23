@@ -1,11 +1,13 @@
 Data attributes allow storing custom data private to the page or application directly in HTML elements.
+
 ## HTML Syntax:
 
 ```html
-<element data-*="somevalue">
+<element data-*="somevalue"></element>
 ```
 
 ## Accessing Data Attributes in JavaScript:
+
 ### 1. Selecting an Element with a Data Attribute:
 
 ```javascript
@@ -24,13 +26,13 @@ This returns an object where hyphens in attribute names are replaced with camelC
 
 ```javascript
 console.log(element.dataset.test);
-console.log(element.dataset.testTwo);  // For data-test-two
+console.log(element.dataset.testTwo); // For data-test-two
 ```
 
 ### 4. Setting Data Attribute Values:
 
 ```javascript
-element.dataset.test = "5555";
+element.dataset.test = '5555';
 ```
 
 ## Use Case Example:
@@ -42,14 +44,15 @@ Tracking button clicks using data attributes:
 ```
 
 ```javascript
-const buttons = document.querySelectorAll("button");
+const buttons = document.querySelectorAll('button');
 buttons.forEach(button => {
-    button.addEventListener("click", () => {
-        const currentClicks = parseInt(button.dataset.clicks || 0);
-        button.dataset.clicks = currentClicks + 1;
-    });
+  button.addEventListener('click', () => {
+    const currentClicks = parseInt(button.dataset.clicks || 0);
+    button.dataset.clicks = currentClicks + 1;
+  });
 });
 ```
+
 ## Best Practices:
 
 1. Use data attributes for storing small amounts of data.

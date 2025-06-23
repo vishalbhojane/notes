@@ -1,3 +1,4 @@
+
 Create a class `Calculator` that performs chainable mathematical operations.
 It should:
 

@@ -24,7 +24,7 @@ function myJSONStringify(input) {
 
     // Handle arrays
     if (Array.isArray(value)) {
-      const elements = value.map((item) => {
+      const elements = value.map(item => {
         const result = stringify(item);
         return result === undefined ? 'null' : result;
       });
@@ -63,29 +63,31 @@ function myJSONStringify(input) {
 
 ```javascript
 // Basic types
-console.log(myJSONStringify(null));  // "null"
-console.log(myJSONStringify(42));    // "42"
-console.log(myJSONStringify("hello")); // "\"hello\""
-console.log(myJSONStringify(true));  // "true"
+console.log(myJSONStringify(null)); // "null"
+console.log(myJSONStringify(42)); // "42"
+console.log(myJSONStringify('hello')); // "\"hello\""
+console.log(myJSONStringify(true)); // "true"
 
 // Arrays
-console.log(myJSONStringify([1, "two", false]));
+console.log(myJSONStringify([1, 'two', false]));
 // "[1,\"two\",false]"
 
 // Objects
-console.log(myJSONStringify({a: 1, b: "two"}));
+console.log(myJSONStringify({a: 1, b: 'two'}));
 // "{\"a\":1,\"b\":\"two\"}"
 
 // Nested structures
-console.log(myJSONStringify({
-  name: "John",
-  age: 30,
-  address: {
-    street: "Main St",
-    city: "Boston"
-  },
-  hobbies: ["reading", "music"]
-}));
+console.log(
+  myJSONStringify({
+    name: 'John',
+    age: 30,
+    address: {
+      street: 'Main St',
+      city: 'Boston',
+    },
+    hobbies: ['reading', 'music'],
+  })
+);
 // "{\"name\":\"John\",\"age\":30,\"address\":{\"street\":\"Main St\",\"city\":\"Boston\"},\"hobbies\":[\"reading\",\"music\"]}"
 
 // Special cases
@@ -94,11 +96,11 @@ console.log(myJSONStringify(Infinity)); // "null"
 console.log(myJSONStringify({a: undefined})); // "{}"
 
 // Error case - circular reference
-const circular = { a: 1 };
+const circular = {a: 1};
 circular.self = circular;
 try {
-    myJSONStringify(circular);
-} catch(e) {
-    console.log(e.message); // "Converting circular structure to JSON"
+  myJSONStringify(circular);
+} catch (e) {
+  console.log(e.message); // "Converting circular structure to JSON"
 }
 ```

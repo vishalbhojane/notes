@@ -20,17 +20,17 @@ Not all events bubble up (e.g., `blur`, `focus`, `scroll`)
 
 ```html
 <ul id="category">
-    <li id="laptops">laptops</li>
-    <li id="cameras">cameras</li>
-    <li id="shoes">shoes</li>
+  <li id="laptops">laptops</li>
+  <li id="cameras">cameras</li>
+  <li id="shoes">shoes</li>
 </ul>
 ```
 
 ```javascript
-document.querySelector("#category").addEventListener('click', (e) => {
-    if (e.target.tagName === 'LI') {
-        window.location.href = "/" + e.target.id;
-    }
+document.querySelector('#category').addEventListener('click', e => {
+  if (e.target.tagName === 'LI') {
+    window.location.href = '/' + e.target.id;
+  }
 });
 ```
 
@@ -38,17 +38,17 @@ document.querySelector("#category").addEventListener('click', (e) => {
 
 ```html
 <div id="form">
-    <input type="text" id="name" data-uppercase>
-    <input type="text" id="pan">
-    <input type="text" id="mobile" data-uppercase>
+  <input type="text" id="name" data-uppercase />
+  <input type="text" id="pan" />
+  <input type="text" id="mobile" data-uppercase />
 </div>
 ```
 
 ```javascript
-document.querySelector("#form").addEventListener('keyup', (e) => {
-    if (e.target.dataset.uppercase !== undefined) {
-        e.target.value = e.target.value.toUpperCase();
-    }
+document.querySelector('#form').addEventListener('keyup', e => {
+  if (e.target.dataset.uppercase !== undefined) {
+    e.target.value = e.target.value.toUpperCase();
+  }
 });
 ```
 

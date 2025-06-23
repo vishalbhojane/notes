@@ -27,8 +27,8 @@ const InfiniteScroll = () => {
         return;
       }
 
-      setItems((prev) => [...prev, ...data.products]);
-      setPage((prev) => prev + 1);
+      setItems(prev => [...prev, ...data.products]);
+      setPage(prev => prev + 1);
     } catch (error) {
       console.error(error);
     } finally {
@@ -44,7 +44,7 @@ const InfiniteScroll = () => {
   // Initialize intersection observer
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
+      entries => {
         if (entries[0].isIntersecting && hasMore && !loading) {
           fetchData();
         }
@@ -69,7 +69,7 @@ const InfiniteScroll = () => {
       <h1>Products</h1>
 
       <div className="products-grid">
-        {items.map((item) => (
+        {items.map(item => (
           <div key={item.id} className="product-card">
             <h3>{item.title}</h3>
             <p>${item.price}</p>

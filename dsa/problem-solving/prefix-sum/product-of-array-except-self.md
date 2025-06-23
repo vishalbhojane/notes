@@ -37,11 +37,11 @@ answer[2] = (-1)*1*(-3)*3 = 9 (other positions have 0 due to multiplication by 0
 
 1. Initialize answer array with 1s.
 2. Prefix Pass (Left to Right):
-    - Store the product of all elements left of i in answer\[i].
-    - Update the running prefix product.
+   - Store the product of all elements left of i in answer\[i].
+   - Update the running prefix product.
 3. Suffix Pass (Right to Left):
-    - Multiply answer\[i] by the product of all elements right of i (stored in suffix).
-    - Update the running suffix product.
+   - Multiply answer\[i] by the product of all elements right of i (stored in suffix).
+   - Update the running suffix product.
 
 ## Solution Code
 
@@ -49,24 +49,24 @@ javascript
 
 ```javascript
 function productExceptSelf(nums) {
-    const n = nums.length;
-    const answer = new Array(n).fill(1);
-    
-    // Prefix pass (left to right)
-    let prefix = 1;
-    for (let i = 0; i < n; i++) {
-        answer[i] = prefix;
-        prefix *= nums[i];
-    }
-    
-    // Suffix pass (right to left)
-    let suffix = 1;
-    for (let i = n - 1; i >= 0; i--) {
-        answer[i] *= suffix;
-        suffix *= nums[i];
-    }
-    
-    return answer;
+  const n = nums.length;
+  const answer = new Array(n).fill(1);
+
+  // Prefix pass (left to right)
+  let prefix = 1;
+  for (let i = 0; i < n; i++) {
+    answer[i] = prefix;
+    prefix *= nums[i];
+  }
+
+  // Suffix pass (right to left)
+  let suffix = 1;
+  for (let i = n - 1; i >= 0; i--) {
+    answer[i] *= suffix;
+    suffix *= nums[i];
+  }
+
+  return answer;
 }
 ```
 
