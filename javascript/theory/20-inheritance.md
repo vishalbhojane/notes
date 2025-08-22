@@ -56,7 +56,7 @@ let object2 = {
 object2.__proto__ = object;
 console.log(object2.name); // ankesh
 console.log(object2.city); // mumbai
-object2.getIntro();
+object2.getIntro(); // ankesh from mumbai
 ```
 
 ### Adding New Properties and Methods

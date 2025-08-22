@@ -14,13 +14,13 @@ class TimeLimitedCache {
   }
 
   set(key, data, time) {
-	    const entry = this.store.get(key);
+	const entry = this.store.get(key);
     if (entry) clearTimeout(entry.timerId);
 
     const timerId = setTimeout(() => this.store.delete(key), time);
     this.store.set(key, {data, timerId});
 
-    return Boolean(entry);
+    return Boolean(entry);Ï
   }
 
   get(key) {
