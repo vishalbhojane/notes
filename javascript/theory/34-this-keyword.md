@@ -105,4 +105,4 @@ In event listeners, `this` refers to the element that triggered the event:
 - In functions: `this` typically refers to the global object (undefined in strict mode).
 - In event handlers: `this` refers to the element that received the event.
 - `call()`, `apply()`, and `bind()` can explicitly set `this`.
-- Arrow functions capture `this` from the surrounding scope.
+- Arrow functions capture `this` lexically from the surrounding scope where they were defined

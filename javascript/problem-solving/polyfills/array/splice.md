@@ -27,8 +27,12 @@ Array.prototype.mySplice = function (start, deleteCount, ...items) {
 Usage
 
 ```javascript
-[1, 2, 3, 4, 5].mySplice(2, 1, 'a', 'b'); // [3] // [1, 2, 'a', 'b', 4, 5]
-[1, 2, 3, 4, 5].mySplice(2); // [3, 4, 5] // [1, 2]
-[1, 2, 3, 4, 5].mySplice(-2, 1); // [4]
-[1, 2, 3, 4, 5].mySplice(2, 0, 'a', 'b'); // [] // [1, 2, 'a', 'b', 3, 4, 5]
+console.log([1, 2, 3, 4, 5].mySplice(2, 1, 'a', 'b'));
+// [3] // [1, 2, 'a', 'b', 4, 5]
+console.log([1, 2, 3, 4, 5].mySplice(2));
+// [3, 4, 5] // [1, 2]
+console.log([1, 2, 3, 4, 5].mySplice(-2, 1));
+// [4]
+console.log([1, 2, 3, 4, 5].mySplice(2, 0, 'a', 'b'));
+// [] // [1, 2, 'a', 'b', 3, 4, 5]
 ```
