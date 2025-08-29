@@ -31,13 +31,38 @@ function fib(n, memo = {}) {
 
 ```javascript
 function memoize(fn) {
-  const cache = {};
+  const cache = new Map();
+  return function (...args) {
+    const key = args.length > 1 ? JSON.stringify(args) : args[0];
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    const result = fn.apply(this, args);
+    cache.set(key, result);
+    return result;
+  };
+}
+```
+
+## LRU Memoize with Size Limit
+
+```javascript
+function memoize(fn, maxSize = 100) {
+  const cache = new Map();
   return function (...args) {
     const key = JSON.stringify(args);
-    if (key in cache) {
-      return cache[key];
+    if (cache.has(key)) {
+      const value = cache.get(key);
+      cache.delete(key);
+      cache.set(key, value); // move to most recent
+      return value;
     }
-    return (cache[key] = fn.apply(this, args));
+    const result = fn.apply(this, args);
+    cache.set(key, result);
+    if (cache.size > maxSize) {
+      cache.delete(cache.keys().next().value); // evict oldest
+    }
+    return result;
   };
 }
 ```
