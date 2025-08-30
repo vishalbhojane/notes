@@ -510,7 +510,13 @@ Here
 
 **Example:**
 
-`// alignItems affects children in one line <View style={{ flexDirection: 'row', alignItems: 'center' }} />  // alignContent affects spacing between lines <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignContent: 'space-between' }} />`
+```tsx
+// alignItems affects children in one line
+<View style={{ flexDirection: 'row', alignItems: 'center' }} />
+
+// alignContent affects spacing between lines
+<View style={{ flexDirection: 'row', flexWrap: 'wrap', alignContent: 'space-between' }} />
+```
 
 ---
 
@@ -540,7 +546,14 @@ Here
 
 **Example:**
 
-`import React, { PureComponent } from 'react';  class MyComponent extends PureComponent {   render() {     return <Text>{this.props.name}</Text>;   } }`
+```tsx
+import React, {PureComponent} from 'react';
+class MyComponent extends PureComponent {
+  render() {
+    return <Text>{this.props.name}</Text>;
+  }
+}
+```
 
 ✅ Best for functional UI that doesn’t change often.
 
@@ -1741,11 +1754,17 @@ Redux is a **library that implements Flux concepts** with some improvements (lik
 
 - **mapStateToProps** → maps store state to component props.
 
-`const mapStateToProps = (state) => ({   user: state.user, });`
+```tsx
+const mapStateToProps = state => ({user: state.user});
+```
 
 - **mapDispatchToProps** → maps dispatch actions to component props.
 
-`const mapDispatchToProps = (dispatch) => ({   updateUser: (user) => dispatch(updateUser(user)), });`
+```tsx
+const mapDispatchToProps = dispatch => ({
+  updateUser: user => dispatch(updateUser(user)),
+});
+```
 
 ---
 
@@ -1753,7 +1772,9 @@ Redux is a **library that implements Flux concepts** with some improvements (lik
 
 Constants are **action type identifiers** stored in variables to avoid typos and maintain consistency.
 
-`export const ADD_TODO = 'ADD_TODO';`
+```tsx
+export const ADD_TODO = 'ADD_TODO';
+```
 
 ---
 
@@ -1761,7 +1782,18 @@ Constants are **action type identifiers** stored in variables to avoid typos and
 
 Reducers are **pure functions** that take the current state and an action, then return a **new state**.
 
-`function counterReducer(state = 0, action) {   switch (action.type) {     case 'INCREMENT': return state + 1;     case 'DECREMENT': return state - 1;     default: return state;   } }`
+```tsx
+function counterReducer(state = 0, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1;
+    case 'DECREMENT':
+      return state - 1;
+    default:
+      return state;
+  }
+}
+```
 
 ---
 
@@ -1795,11 +1827,20 @@ The store is a **JavaScript object** that holds the entire state tree of the app
 
 - Inside **reducer**:
 
-`function counterReducer(state = { count: 0 }, action) {   switch (action.type) {     default:       return state;   } }`
+```tsx
+function counterReducer(state = {count: 0}, action) {
+  switch (action.type) {
+    default:
+      return state;
+  }
+}
+```
 
 - Or via **preloadedState** in `createStore`:
 
-`const store = createStore(reducer, { count: 10 });`
+```tsx
+const store = createStore(reducer, {count: 10});
+```
 
 ---
 
