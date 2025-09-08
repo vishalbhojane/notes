@@ -83,6 +83,33 @@ async function fetchData() {
 fetchData();
 ```
 
+## AbortController
+
+Sometimes you may want to cancel an ongoing fetch request
+for example, when a user navigates away, or a search input changes before the request completes
+You can use the AbortController API for this purpose
+
+Basic Usage
+
+```javascript
+const controller = new AbortController();
+const signal = controller.signal;
+
+fetch('https://api.example.com/data', {signal})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => {
+    if (error.name === 'AbortError') {
+      console.log('Fetch aborted');
+    } else {
+      console.error('Fetch error:', error);
+    }
+  });
+
+// Abort the request after 2 seconds
+setTimeout(() => controller.abort(), 2000);
+```
+
 ## Key Points
 
 - `fetch()` returns a Promise that resolves to a Response object.
